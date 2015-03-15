@@ -4,6 +4,8 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var inventory = require('./ripe');
+var mongoose = require('mongoose');
 
 var app = express();
 var expressHbs = require('express-handlebars');
@@ -58,3 +60,13 @@ app.use(function(err, req, res, next) {
 
 
 module.exports = app;
+
+mongoose.connect('mongodb://localhost/ripedb');
+
+var db = mongoose.connection;
+db.on('error', function callback () {
+    console.error('connection error');
+});
+db.once('open', function callback () {
+    console.error('connection success');
+});
