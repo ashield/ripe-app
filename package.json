@@ -12,6 +12,7 @@
     "express": "~4.11.1",
     "express-handlebars": "^1.2.2",
     "mongoose": "^3.8.25",
+    "mongoose-relationship": "^0.1.4",
     "morgan": "~1.5.1",
     "serve-favicon": "~2.2.0"
   },

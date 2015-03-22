@@ -27,26 +27,47 @@ app.get('/', function (req, res) {
     res.render('index', {title: 'RipeApp'});
 });
 
-app.route('/')
-//     // list all our inventory items
-//     .get(inventory.retrieveAll)
+app.route('/users')
+    // Get all projects
+    .get(ripe.allUsers)
+
+    // create new user
+    .post(ripe.createUser);
+
+// Individual users tasks
+    app.route('/users/:id')
+    // view a project item
+    .get(ripe.myTasks)
+
+
+app.route('/projects')
+    // Get all projects
+    .get(ripe.allProjects)
 
     // create new project
-    .post(ripe.create);
+    .post(ripe.createProject);
 
-    // app.get('/new', ripe.new);
 
-// app.route('/:id')
-// // view a single item
-//     .get(inventory.show)
-// // update a single item
-//     .post(inventory.update)
-// // delete a single item
-//     .delete(inventory.delete);
+app.route('/projects/:id')
+// view a project item
+    .get(ripe.showOneProject)
+//create new task in a project
+    // .post(ripe.createTask)
+
+// add tasks to a project
+    .post(ripe.ProjectUpdateTasks);
 
 // app.route('/:id/edit')
 // // open edit form
 //     .get(inventory.edit);
+
+// Individual task test
+    app.route('/projects/:id/:id')
+    // view a project item
+    .get(ripe.showTask)
+
+
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
