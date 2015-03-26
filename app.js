@@ -29,6 +29,10 @@ app.get('/', function (req, res) {
 
 // PROJECTS
 
+app.get('/projects.json', function (req, res) {
+    res.json([1 ,2, 3, 4, 5]);
+})
+
 app.route('/projects')
     // Get all projects
     .get(ripe.allProjects)
@@ -48,6 +52,7 @@ app.route('/projects/:id')
 
 // Individual task test
 app.route('/projects/:id/:id')
+// app.route('/projects/:project_id/tasks/:id')
     // view a project item
     .get(ripe.showTask)
 

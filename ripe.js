@@ -59,34 +59,34 @@ exports.ProjectUpdateTasks = function (req, res) {
     Project.findOne({'_id':mongoose.Types.ObjectId(req.param('id'))}, function (err, project) {
         if (err) return console.error(err); // change to 404 page
 	    
-	    var tasks = new Task ({
+	    var task = new Task ({
 	    	taskname: req.body.taskname,
 	    	taskdescription: req.body.taskdescription,
 	    	_project: project._id ,
 	    	user: req.body.user
 	    });
 
-	    tasks.save(function (err) {
+	    task.save(function (err) {
 	      if (err) return console.error(err);
-	      console.log('task_saved')
+	      // console.log('task_saved')
 	    });
 
-		Project.tasks = tasks._id;
-		project.tasks.push(tasks._id); //needs to be populate instead
+		// Project.tasks = tasks._id;
+		project.tasks.push(task); //needs to be populate instead
 
 	   project.save(function (err, project) {
 	   		if (err) return console.error(err);
+	   		console.log(project.tasks);
 	   });
 
-   	    Users.findOne({ username: tasks.user})
+	user.save(function (err, user) {
+		if (err) return console.error(err);
+   	    Users.findOne({ username: task.user})
 	    .populate('tasks')  // populate isn't actually working, push is doing this
 	    .exec(function (err, user) {
 	      if (err) return console.error(err);
-	      user._tasks.push(tasks._id);
-	      console.log(user)
-
-  	    user.save(function (err, user) {
-     		if (err) return console.error(err);
+	      // user._tasks.push(task._id);
+	      // console.log(user)     		
      	});
 	});
 
