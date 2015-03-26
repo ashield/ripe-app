@@ -62,7 +62,7 @@ exports.ProjectUpdateTasks = function (req, res) {
 	    var tasks = new Task ({
 	    	taskname: req.body.taskname,
 	    	taskdescription: req.body.taskdescription,
-	    	_project: project._id,
+	    	_project: project._id ,
 	    	user: req.body.user
 	    });
 
@@ -72,11 +72,11 @@ exports.ProjectUpdateTasks = function (req, res) {
 	    });
 
 		Project.tasks = tasks._id;
-		project.tasks.push(tasks._id);
+		project.tasks.push(tasks._id); //needs to be populate instead
 
-   project.save(function (err, project) {
-   		if (err) return console.error(err);
-   });
+	   project.save(function (err, project) {
+	   		if (err) return console.error(err);
+	   });
 
    	    Users.findOne({ username: tasks.user})
 	    .populate('tasks')  // populate isn't actually working, push is doing this
@@ -85,12 +85,12 @@ exports.ProjectUpdateTasks = function (req, res) {
 	      user._tasks.push(tasks._id);
 	      console.log(user)
 
-  	    user.save(function (err, project) {
+  	    user.save(function (err, user) {
      		if (err) return console.error(err);
-     });
-});
+     	});
+	});
 
-   res.send(project);
+   	res.send(project);
 
    });	
 }
@@ -99,14 +99,15 @@ exports.allProjects = function (req, res) {
     Project.find(function (err, projects) {
         if (err) return console.error(err);
         // res.send(projects);
-        res.render('projects', {projects: projects});
+        res.render('projects', {projects: projects, title: 'Projects'});
     })
 };
 
 exports.showOneProject = function (req, res) {
     Project.findOne({'_id':mongoose.Types.ObjectId(req.param('id'))}, function (err, project) {
     	if (err) return console.error(err);
-    	res.send(project);
+    	// res.send(project);
+    	res.render('individual-project', {project: project, title: project.name});
     });
 };
 
@@ -151,7 +152,6 @@ exports.createUser = function(req, res) {
 
     user.save(function (err, user) {
     	if (err) return console.error(err);
-
     });
 };
 

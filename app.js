@@ -27,18 +27,7 @@ app.get('/', function (req, res) {
     res.render('index', {title: 'RipeApp'});
 });
 
-app.route('/users')
-    // Get all projects
-    .get(ripe.allUsers)
-
-    // create new user
-    .post(ripe.createUser);
-
-// Individual users tasks
-    app.route('/users/:id')
-    // view a project item
-    .get(ripe.myTasks)
-
+// PROJECTS
 
 app.route('/projects')
     // Get all projects
@@ -47,25 +36,34 @@ app.route('/projects')
     // create new project
     .post(ripe.createProject);
 
-
 app.route('/projects/:id')
 // view a project item
     .get(ripe.showOneProject)
+
 //create new task in a project
     // .post(ripe.createTask)
 
 // add tasks to a project
     .post(ripe.ProjectUpdateTasks);
 
-// app.route('/:id/edit')
-// // open edit form
-//     .get(inventory.edit);
-
 // Individual task test
-    app.route('/projects/:id/:id')
+app.route('/projects/:id/:id')
     // view a project item
     .get(ripe.showTask)
 
+
+// USERS
+app.route('/users')
+    // Get all projects
+    .get(ripe.allUsers)
+
+    // create new user
+    .post(ripe.createUser);
+
+// Individual users tasks
+app.route('/users/:id')
+    // view a project item
+    .get(ripe.myTasks)
 
 
 

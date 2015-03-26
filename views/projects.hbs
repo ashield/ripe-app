@@ -1,23 +1,23 @@
-<h1>Projects</h1>
-
 <div class="content">
-	<ul class="items">
+	<div class="projects">
 	{{#each projects}}
-		<li>
-			<div class="actions">
-				<!-- <a href="/{{id}}/edit" class="edit button"></a>
-				<span class="delete" data-id="{{id}}"></span> -->
-			</div>
-			<a href="/projects/{{id}}">
-			   <div class="info">
-			       <header class="name">{{name}}</header>
-			       <p class="description">{{description}}</p>
-			       <p class="tasks">{{tasks}}</p>
-			    </div>
-			<!-- </a> -->
-		</li>
-	{{/each}}	
-	</ul>
+		<figure>
+		   <div class="info">
+		       <header class="name">{{name}}</header>
+		       <p class="description">{{description}}</p>
+		       {{#each tasks}}
+		       <p class="tasks">{{this}}</p>
+		       {{/each}}
+		    </div>
+			<a href="/projects/{{id}}">edit</a>
+		</figure>
+	{{/each}}
+		<figure>
+		   <div class="info">
+		       <a href="#">+</a>
+		   </div>
+		</figure>
+	</div>
 </div>
 
 
