@@ -9,7 +9,7 @@ var projectSchema = Schema ({
 	status: Number, // 1 = To do, 2 = in progress, 3 = done
 	date: Date, 
 	position: Number,
-	tasks: [{ type: Schema.Types.ObjectId, ref: 'Task'}]
+	_tasks: [{ type: Schema.Types.ObjectId, ref: 'Task'}]
 })
 
 var taskSchema = Schema ({
@@ -45,6 +45,7 @@ exports.createProject = function(req, res) {
     var project = new Project({
         name: req.body.name,
         description: req.body.description,
+
     });
 
     project.save(function (err, project) {
@@ -62,38 +63,85 @@ exports.ProjectUpdateTasks = function (req, res) {
 	    var task = new Task ({
 	    	taskname: req.body.taskname,
 	    	taskdescription: req.body.taskdescription,
-	    	_project: project._id ,
+	    	_project: project._id,
 	    	user: req.body.user
 	    });
 
 	    task.save(function (err) {
 	      if (err) return console.error(err);
-	      // console.log('task_saved')
+	      // console.log(task.taskname)
+
 	    });
 
-		// Project.tasks = tasks._id;
-		project.tasks.push(task); //needs to be populate instead
 
-	   project.save(function (err, project) {
-	   		if (err) return console.error(err);
-	   		console.log(project.tasks);
-	   });
 
-	user.save(function (err, user) {
-		if (err) return console.error(err);
-   	    Users.findOne({ username: task.user})
-	    .populate('tasks')  // populate isn't actually working, push is doing this
-	    .exec(function (err, user) {
-	      if (err) return console.error(err);
-	      // user._tasks.push(task._id);
-	      // console.log(user)     		
-     	});
-	});
+
+
+	    project._tasks = task._id;
+
+		// project.tasks.push(task); //needs to be populate instead
+		// console.log(task)
+
+	  
+
+	   // console.log(project._tasks);
+
+
+	   // Project
+	   // .populate('project._tasks')
+	   // .populate({
+	   //   path: '_tasks',
+	   //   select: 'task_id',
+	   // }, function (err, project) {
+	   //   assert(Project._id == project._id) // the document itself is passed
+	   // })
+
+
+
+	   	    project.save(function (err, project) {
+				if (err) return console.error(err);
+	   	    		// console.log(project.tasks);
+	   	    		
+	   	    
+
+	   	          Project.findOne({_id: project._id})
+	   	    	    .populate({path: '_tasks', select: '_id'})
+	   	    	    .exec(function (err, project) {
+	   	    	      if (err) return console.error(err);
+	   	    	      console.log(task._id)
+	   	    	      // console.log(project._tasks)
+	   	    	      console.log(project)
+
+	   	    	  });
+	   	    });
+
+
+
+      //  Task.find({_id: task._id})
+ 	    // .populate(project._tasks)  // populate isn't actually working, push is doing this
+ 	    // .exec(function (err, results) {
+ 	    //   if (err) return console.error(err);
+ 	    //   console.log(task._id)
+ 	    //   console.log(project._tasks)
+ 	    //   console.log(results)         		
+      // });
+
+	// user.save(function (err, user) {
+	// 	if (err) return console.error(err);
+ //   	    Users.findOne({ username: task.user})
+	//     .populate('tasks')  // populate isn't actually working, push is doing this
+	//     .exec(function (err, user) {
+	//       if (err) return console.error(err);
+	//       // user._tasks.push(task._id);
+	//       // console.log(user)     		
+ //     	});
+	// });
 
    	res.send(project);
 
    });	
 }
+
 
 exports.allProjects = function (req, res) {
     Project.find(function (err, projects) {
