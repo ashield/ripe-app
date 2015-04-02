@@ -3,8 +3,10 @@
 		<figure>
 		   <div class="info">
 			   	<p class="description">{{project.description}}</p>
-		       {{#each project._tasks}}
-		       <p class="tasks">{{this}}</p>
+		       {{#each project.tasks}}
+		       <p class="taskname">{{taskname}}</p>
+		       <p class="taskdescription">{{taskdescription}}</p>
+		       <p class="user">{{user}}</p>
 		       {{/each}}
 		    </div>
 			<a href="#">save</a>

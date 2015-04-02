@@ -1,14 +1,23 @@
-var express = require('express');
-var path = require('path');
-var favicon = require('serve-favicon');
-var logger = require('morgan');
-var cookieParser = require('cookie-parser');
-var bodyParser = require('body-parser');
-var ripe = require('./ripe');
-var mongoose = require('mongoose');
+var express = require('express'),
+    path = require('path'),
+    favicon = require('serve-favicon'),
+    logger = require('morgan'),
+    cookieParser = require('cookie-parser'),
+    bodyParser = require('body-parser'),
+    methodOverride = require('method-override'),
+    expressSession = require('express-session'),
+    mongoose = require('mongoose'),
+    expressHbs = require('express-handlebars'),
+    passport = require('passport'),
+    LocalStrategy = require('passport-local').Strategy;
+    GoogleStrategy = require('passport-google'),
 
-var app = express();
-var expressHbs = require('express-handlebars');
+    ripe = require('./ripe'),
+    app = express();
+
+
+// Passposrt Auth
+
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -23,15 +32,30 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
-app.get('/', function (req, res) {
-    res.render('index', {title: 'RipeApp'});
-});
+
+// PASSPORT
+app.use(methodOverride());
+app.use(expressSession({secret: 'mySecretKey'}));
+app.use(passport.initialize());
+app.use(passport.session());
+
+var Users = require('./models/account');
+passport.use(Users.createStrategy());
+passport.use(new LocalStrategy(Users.authenticate()));
+passport.serializeUser(Users.serializeUser());
+passport.deserializeUser(Users.deserializeUser());
+
 
 // PROJECTS
 
-app.get('/projects.json', function (req, res) {
-    res.json([1 ,2, 3, 4, 5]);
-})
+// app.get('/projects.json', function (req, res) {
+//     res.json([1 ,2, 3, 4, 5]);
+// })
+
+app.route('/')
+    .get(ripe.dashboard)
+
+    app.get('/projects/new', ripe.new);
 
 app.route('/projects')
     // Get all projects
@@ -69,6 +93,20 @@ app.route('/users')
 app.route('/users/:id')
     // view a project item
     .get(ripe.myTasks)
+
+app.route('/login')
+    .get(ripe.login)
+
+    .post(ripe.loginUser);
+
+
+app.route('/register')
+    .get(ripe.register)
+
+    .post(ripe.registerUser)
+
+app.route('/logout')
+    .get(ripe.logout)
 
 
 

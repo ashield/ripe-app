@@ -5,8 +5,8 @@
 		   <div class="info">
 		       <header class="name">{{name}}</header>
 		       <p class="description">{{description}}</p>
-		       {{#each _tasks}}
-		       <p class="tasks">{{this}}</p>
+		       {{#each tasks}}
+		       <p class="tasks">{{taskname}}</p>
 		       {{/each}}
 		    </div>
 			<a href="/projects/{{id}}">edit</a>
@@ -14,7 +14,7 @@
 	{{/each}}
 		<figure>
 		   <div class="info">
-		       <a href="#">+</a>
+		       <a href="/projects/new/">+</a>
 		   </div>
 		</figure>
 	</div>
