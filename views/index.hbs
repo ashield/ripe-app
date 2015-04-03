@@ -4,10 +4,13 @@
 	</figure>
 		
 	<figure>
-		<h2><a href="/users/5517e6aa24ca2c5fc6960963/">My Tasks</a></h2>
+		<h2><a href="/users/{{user._id}}">My Tasks</a></h2>
 	</figure>
 	
 	<figure>
- 		<h2><a href="/users/{{req.user._id}}">Settings</a></h2>
+		<!-- {{#if user}} -->
+ 		<h2><a href="/users/{{user._id}}">Settings</a>
+ 		</h2>
+ 		<!-- {{/if}} -->
 	</figure>
 </div>

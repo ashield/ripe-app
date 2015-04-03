@@ -3,9 +3,10 @@
 		<figure>
 		   <div class="info">
 			   <!-- 	<p class="description">{{project.description}}</p> -->
-		       {{#each tasks}}
-		       <p class="taskname">{{taskname}}</p>
-		       {{/each}}
+		      <!--  {{#each tasks}} -->
+		       <p class="taskname" data-pk="{{_id}}">{{taskname}}</p>
+		       <!-- {{/each}} -->
+		       <p class="taskname">Add task</p>
 		    </div>
 			<a href="#">save</a>
 		</figure>

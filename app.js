@@ -11,7 +11,6 @@ var express = require('express'),
     passport = require('passport'),
     LocalStrategy = require('passport-local').Strategy;
     GoogleStrategy = require('passport-google'),
-
     ripe = require('./ripe'),
     app = express();
 
@@ -39,7 +38,7 @@ app.use(expressSession({secret: 'mySecretKey'}));
 app.use(passport.initialize());
 app.use(passport.session());
 
-var Users = require('./models/account');
+var Users = require('./models/user');
 passport.use(Users.createStrategy());
 passport.use(new LocalStrategy(Users.authenticate()));
 passport.serializeUser(Users.serializeUser());
@@ -80,6 +79,11 @@ app.route('/projects/:id/:id')
     // view a project item
     .get(ripe.showTask)
 
+app.route('/tasks/:id')
+    .post(ripe.updateTasks)
+
+    .get(ripe.showSingleTask)
+
 
 // USERS
 app.route('/users')
@@ -93,6 +97,8 @@ app.route('/users')
 app.route('/users/:id')
     // view a project item
     .get(ripe.myTasks)
+
+    // .post(ripe.updateTasks)
 
 app.route('/login')
     .get(ripe.login)

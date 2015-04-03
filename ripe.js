@@ -2,9 +2,8 @@ var mongoose = require('mongoose'),
 	Schema = mongoose.Schema,
     passportLocalMongoose = require('passport-local-mongoose'),
     bcrypt = require('bcrypt');
-	// relationship = require("mongoose-relationship");
-    var Account = require('./models/account');
     var passport = require('passport');
+
 
 var projectSchema = Schema ({
 	name: String,
@@ -35,7 +34,7 @@ var Project  = mongoose.model('Project', projectSchema),
 	Settings = mongoose.model('Settings', settingsSchema);
 
 
-var Users = require('./models/account');
+var Users = require('./models/user');
 
 
 // LOGIN
@@ -71,7 +70,7 @@ exports.register = function (req, res) {
 }
 
 exports.registerUser = function (req, res) {
-        Account.register(new Account({ username : req.body.username }), req.body.password, function(err, account) {
+        Users.register(new Users({ username : req.body.username }), req.body.password, function(err, account) {
             if (err) {
               return res.render("register", {title: "Sorry. That username already exists. Try again."});
             }
@@ -95,7 +94,7 @@ exports.logout = function (req, res) {
 exports.dashboard = function (req, res) {
         if (req.user) {
             console.log(req.user.username);
-            res.render('index', {title: 'Ripe App'});
+            res.render('index', {title: 'Ripe App', user: req.user});
         } else {
             res.redirect('/login');
         }
@@ -199,7 +198,8 @@ exports.createTask = function(req, res) {
 exports.showTask = function (req, res) {
     Task.findOne({'_id':mongoose.Types.ObjectId(req.param('id'))}, function (err, task) {
     	if (err) return console.error(err);
-    	res.send(task);
+    	// res.send(task);
+        res.render('individual-tasks')
     });
 };
 
@@ -254,6 +254,23 @@ exports.myTasks = function (req, res) {
     	
 	
     	});
+    });
+};
+
+exports.updateTasks = function (req, res) {
+    Task.findOne({'_id':mongoose.Types.ObjectId(req.param('id'))}, function (err, task) {
+        if (err) return console.error(err);
+        task['taskname'] = req.body.taskname;
+        task.save()
+        res.send(task)
+    });
+}
+
+exports.showSingleTask = function (req, res) {
+    Task.findOne({'_id':mongoose.Types.ObjectId(req.param('id'))}, function (err, task) {
+        if (err) return console.error(err);
+        // res.send(task);
+        res.render('individual-tasks' , {tasks: task})
     });
 };
 
