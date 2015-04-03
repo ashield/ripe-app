@@ -10,7 +10,7 @@ var projectSchema = Schema ({
 	description: String,
 	user: String, // user who created project
 	status: Number, // 1 = To do, 2 = in progress, 3 = done
-	date: Date, 
+	date: Date,
 	position: Number,
 	// tasks: [{ type: Schema.Types.ObjectId, ref: 'Task'}]
 	tasks: ['Tasks']
@@ -62,7 +62,7 @@ exports.loginUser = function (req, res, next) {
        console.log(user.username);
      })(req, res, next);
    }
-  
+
 // REGISTER
 
 exports.register = function (req, res) {
@@ -89,7 +89,7 @@ exports.logout = function (req, res) {
     res.redirect('/login');
 }
 
-// DASHBOARD 
+// DASHBOARD
 
 exports.dashboard = function (req, res) {
         if (req.user) {
@@ -113,7 +113,7 @@ exports.createProject = function(req, res) {
     });
 
   // this will redirect to /projects/id to allowed for tasks to be added
-	// res.send(project); 
+	// res.send(project);
 	res.redirect('/projects/' + project._id);
 };
 
@@ -124,7 +124,7 @@ exports.new = function (req, res){
 exports.ProjectUpdateTasks = function (req, res) {
     Project.findOne({'_id':mongoose.Types.ObjectId(req.param('id'))}, function (err, project) {
         if (err) return console.error(err); // change to 404 page
-	    
+
 	    var task = new Task ({
 	    	taskname: req.body.taskname,
 	    	taskdescription: req.body.taskdescription,
@@ -132,6 +132,9 @@ exports.ProjectUpdateTasks = function (req, res) {
 	    	user: req.body.user
 	    });
 
+			/* figure out how to save under `project` */
+			console.error(project.tasks);
+			var task = _.find(project.tasks, {'_id': req.body.task_id })
 	    task.save(function (err) {
 	      if (err) return console.error(err);
 	      console.log(task)
@@ -142,7 +145,7 @@ exports.ProjectUpdateTasks = function (req, res) {
 
 		project.save(function (err, project) {
 	   		if (err) return console.error(err);
-	   		// console.log(project.tasks);	
+	   		// console.log(project.tasks);
 	   });
 
 	// user.save(function (err, user) {
@@ -153,13 +156,13 @@ exports.ProjectUpdateTasks = function (req, res) {
 	      if (err) return console.error(err);
 	      user._tasks.push(task);
 	      console.log(user)
-	      user.save();     		
+	      user.save();
      	});
 	// });
 
    	res.json(project);
 
-   });	
+   });
 }
 
 
@@ -179,6 +182,13 @@ exports.showOneProject = function (req, res) {
     	res.render('individual-project', {project: project, title: project.name});
     });
 };
+
+exports.findProjectById = function(id){
+	Project.findOne({'_id': mongoose.Types.ObjectId(id)}, function(err, project){
+		if (err) return { error: err }
+		return project;
+	})
+}
 
 
 // TASKS
@@ -228,19 +238,19 @@ exports.createUser = function(req, res) {
 exports.myTasks = function (req, res) {
     Users.findOne({'_id':mongoose.Types.ObjectId(req.param('id'))}, function (err, user) {
     	if (err) return console.error(err);
-    	
+
     	Task.find({user: user.username}, 'taskname _project', function (err, tasks) {
     		if (err) return console.error(err);
     		for (var i=0; i < tasks.length; i ++ ){
     			console.log(tasks[i]._project);
-    		
+
     		// Project.find({_id: tasks[i]._project}, 'name', function (err, projects) {
     		// 	if (err) return console.error(err);
     		// 	for (var x=0; x < projects.length; x ++ ){
     		// 		console.log(projects[x].name);
     		// 	}
     		// });
-    		
+
     		}
 
     		// Project.find({'project.tasks.user': 'user.username'}, function (err, projects) {
@@ -251,19 +261,29 @@ exports.myTasks = function (req, res) {
     		// res.send();
     		res.render('individual-tasks', {tasks: tasks, title: user.username});
 
-    	
-	
+
+
     	});
     });
 };
 
 exports.updateTasks = function (req, res) {
-    Task.findOne({'_id':mongoose.Types.ObjectId(req.param('id'))}, function (err, task) {
-        if (err) return console.error(err);
-        task['taskname'] = req.body.taskname;
-        task.save()
-        res.send(task)
-    });
+	// fetch a project
+
+	/* create a task */
+	var project_id = req.body.project_id;
+	var task_name = req.body.taskname;
+	var project = findProjectById(req.params('id'));
+	console.error(project);
+	res.json({success: "created..."})
+	/* add it to projet tasks */
+    // Task.findOne({'_id':mongoose.Types.ObjectId(req.param('id'))}, function (err, task) {
+    //     if (err) return console.error(err);
+		// 		console.error(req.params);
+    //     task['taskname'] = req.body.taskname;
+    //     task.save()
+    //     res.send(task)
+    // });
 }
 
 exports.showSingleTask = function (req, res) {
@@ -273,5 +293,3 @@ exports.showSingleTask = function (req, res) {
         res.render('individual-tasks' , {tasks: task})
     });
 };
-
-
