@@ -3,12 +3,35 @@
 		<figure>
 		   <div class="info">
 			   <!-- 	<p class="description">{{project.description}}</p> -->
-		      <!--  {{#each tasks}} -->
-		       <p class="taskname" data-pk="{{_id}}">{{taskname}}</p>
-		       <!-- {{/each}} -->
-		       <p class="taskname">Add task</p>
+		       {{#each tasks}}
+		       <div class="task">
+		       <p class="taskname" data-id="{{_id}}">{{taskname}}</p>
+		       <p class="task-description" data-id="{{_id}}">{{taskdescription}}</p>
+			{{#if _project}}
+		       <p class="project" data-id="{{_id}}">project: {{_project}}</p>
+		    {{/if}}
+		       <p class="complete" data-id="{{_id}}">complete: {{complete}}</p>
+		       <span class="delete" data-id="{{_id}}">&times;</span>
+		       {{/each}}
+		   		</div>
 		    </div>
-			<a href="#">save</a>
 		</figure>
+
+		    <p class="project-add">Add task</p>
+		    <form class="project-form" method="POST">
+		    <div>
+		    	<div class="field">
+		    		<label for="taskname">Task Name</label>
+		    		<input type="text" name="taskname" id="taskname" required />
+		    	</div>
+		    	<div class="field"></div>
+		    		<label for="taskdescription">Task Description</label>
+		    		<textarea name="taskdescription" id="taskdescription" required></textarea>
+		    </div>
+		    <div class="form-actions">
+		    	<input type="submit" class="save button" value="Save">
+		    	<button type="cancel" class="cancel">Cancel</button>
+		    </div>
+		</form>
 	</div>
 </div>

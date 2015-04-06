@@ -3,17 +3,17 @@ var mongoose = require('mongoose'),
     passportLocalMongoose = require('passport-local-mongoose'),
     bcrypt = require('bcrypt');
     var passport = require('passport');
+    var _ = require('lodash');
 
 
 var projectSchema = Schema ({
 	name: String,
 	description: String,
-	user: String, // user who created project
+	// user: String, // user who created project
 	status: Number, // 1 = To do, 2 = in progress, 3 = done
 	date: Date,
 	position: Number,
-	// tasks: [{ type: Schema.Types.ObjectId, ref: 'Task'}]
-	tasks: ['Tasks']
+	tasks: [{ type: Schema.Types.ObjectId, ref: 'Task'}]
 })
 
 var taskSchema = Schema ({
@@ -30,7 +30,6 @@ var settingsSchema = Schema ({
 
 var Project  = mongoose.model('Project', projectSchema),
 	Task = mongoose.model('Task', taskSchema),
-	// Users = mongoose.model('Users', usersSchema),
 	Settings = mongoose.model('Settings', settingsSchema);
 
 
@@ -39,13 +38,13 @@ var Users = require('./models/user');
 
 // LOGIN
 
-function loggedIn(req, res, next) {
-    if (req.user) {
-        next();
-    } else {
-        res.redirect('/login');
-    }
-}
+// function loggedIn(req, res, next) {
+//     if (req.user) {
+//         next();
+//     } else {
+//         res.redirect('/login');
+//     }
+// }
 
 exports.login = function (req, res) {
     res.render('login', { title : "Login" });
@@ -114,11 +113,13 @@ exports.createProject = function(req, res) {
 
   // this will redirect to /projects/id to allowed for tasks to be added
 	// res.send(project);
+
 	res.redirect('/projects/' + project._id);
+
 };
 
 exports.new = function (req, res){
-	res.render('new', {title: 'Add project'});
+	res.render('new', {title: 'Add project', user: req.user});
 }
 
 exports.ProjectUpdateTasks = function (req, res) {
@@ -134,7 +135,7 @@ exports.ProjectUpdateTasks = function (req, res) {
 
 			/* figure out how to save under `project` */
 			console.error(project.tasks);
-			var task = _.find(project.tasks, {'_id': req.body.task_id })
+			// var task = _.find(project.tasks, {'_id': req.body.task_id })
 	    task.save(function (err) {
 	      if (err) return console.error(err);
 	      console.log(task)
@@ -154,13 +155,16 @@ exports.ProjectUpdateTasks = function (req, res) {
 	    .populate('_tasks')  // populate isn't actually working, push is doing this
 	    .exec(function (err, user) {
 	      if (err) return console.error(err);
+          if (user){
 	      user._tasks.push(task);
+          user.save();
+      }
 	      console.log(user)
-	      user.save();
+	      
      	});
 	// });
 
-   	res.json(project);
+   	res.redirect(req.get('referer'));
 
    });
 }
@@ -169,8 +173,64 @@ exports.ProjectUpdateTasks = function (req, res) {
 exports.allProjects = function (req, res) {
     Project.find(function (err, projects) {
         if (err) return console.error(err);
-        // res.send(projects);
-        res.render('projects', {projects: projects, title: 'Projects'});
+
+        Task.find('taskname', function (err, tasks) {
+            if (err) return console.error(err);
+            /// console.log(tasks)
+            for (var i=0; i < tasks.length; i ++) {
+                var taskname = tasks[i].taskname;
+                console.log(taskname)
+            }
+
+            if (req.user) {
+                // console.log(req.user.username);
+                res.render('projects', {projects: projects, title: 'Projects', tasks: tasks, user: req.user});
+            } else {
+                res.redirect('/login');
+            }
+            
+
+            });
+
+        // console.log(projects)
+
+        // projects.forEach(function(project){
+        //     console.log(project._id);
+        //     Task.find({_project: project._id}), 'taskname', function (err, tasks) {
+        //         if (err) return console.error(err);
+        //         console.log(tasks);
+        //         res.render('projects', {projects: projects, title: 'Projects', tasks: tasks.taskname});
+        //     }
+        // });
+
+        // for (var i=0; i < projects.length; i ++ ){
+         
+        //  var tasks = projects[i].tasks;
+
+   
+         // tasks.forEach(function(task){
+
+
+                 // for (var x=0; x < tasks.length; x ++ ){
+                 //    var taskname = tasks[x].taskname;
+                 //    // console.log(taskname);
+                 // }    
+
+            
+            
+        // })
+
+
+// }
+        // console.log(tasks)
+    
+        
+        // res.send(tasks);
+        
+        // console.log(projects[0].tasks);
+       
+
+        // });
     })
 };
 
@@ -179,28 +239,43 @@ exports.showOneProject = function (req, res) {
     	if (err) return console.error(err);
     	// console.log(project.tasks[0].taskname)
     	// res.send(project);
-    	res.render('individual-project', {project: project, title: project.name});
+
+            Task.find({_project: project._id}, function (err, tasks) {
+                if (err) return console.error(err);
+
+            Users.find('username', function (err, users) {
+                if (err) return console.error(err);
+                console.log(users);
+           
+
+                // LOOK @ LODASH FOR THIS - could work better
+                // for (var i=0; i < tasks.length; i ++ ){
+                // }
+                // res.send(tasks)
+                // res.render('individual-tasks', {tasks: tasks, title: user.username});
+                res.render('individual-project', {project: project, title: project.name, tasks: tasks, users: users, user: req.user} );
+            
+                });
+            });
     });
 };
 
-exports.findProjectById = function(id){
-	Project.findOne({'_id': mongoose.Types.ObjectId(id)}, function(err, project){
-		if (err) return { error: err }
-		return project;
-	})
-}
 
 
 // TASKS
 
 exports.createTask = function(req, res) {
     var task = new Task({
-        taskname: req.body.name,
-        taskdescription: req.body.description,
+        taskname: req.body.taskname,
+        // taskdescription: req.body.description,
+        user: req.user.username
+
      });
         task.save(function (err, task) {
         if (err) return console.error(err);
-        res.send(task);
+        console.log(req.user.username)
+        res.redirect(req.get('referer'));
+
     });
 };
 
@@ -209,7 +284,7 @@ exports.showTask = function (req, res) {
     Task.findOne({'_id':mongoose.Types.ObjectId(req.param('id'))}, function (err, task) {
     	if (err) return console.error(err);
     	// res.send(task);
-        res.render('individual-tasks')
+        res.render('individual-tasks', { user: req.user} )
     });
 };
 
@@ -219,7 +294,8 @@ exports.showTask = function (req, res) {
 exports.allUsers = function (req, res) {
     Users.find(function (err, users) {
         if (err) return console.error(err);
-        res.send(users);
+        // res.send(users);
+        res.redirect('/login');
     })
 };
 
@@ -239,10 +315,12 @@ exports.myTasks = function (req, res) {
     Users.findOne({'_id':mongoose.Types.ObjectId(req.param('id'))}, function (err, user) {
     	if (err) return console.error(err);
 
-    	Task.find({user: user.username}, 'taskname _project', function (err, tasks) {
+    	Task.find({user: user.username}, function (err, tasks) {
     		if (err) return console.error(err);
-    		for (var i=0; i < tasks.length; i ++ ){
-    			console.log(tasks[i]._project);
+
+            // LOOK @ LODACH FOR THIS - could work better
+    		// for (var i=0; i < tasks.length; i ++ ){
+    		//	console.log(tasks[i]._project);
 
     		// Project.find({_id: tasks[i]._project}, 'name', function (err, projects) {
     		// 	if (err) return console.error(err);
@@ -251,7 +329,7 @@ exports.myTasks = function (req, res) {
     		// 	}
     		// });
 
-    		}
+    		// }
 
     		// Project.find({'project.tasks.user': 'user.username'}, function (err, projects) {
     		// 	if (err) return console.error(err);
@@ -259,9 +337,12 @@ exports.myTasks = function (req, res) {
     		// })
 
     		// res.send();
-    		res.render('individual-tasks', {tasks: tasks, title: user.username});
-
-
+            if (req.user) {
+                    res.render('individual-tasks', {tasks: tasks, title: user.username, user: req.user});
+                } else {
+                    res.redirect('/login');
+                }
+    		
 
     	});
     });
@@ -286,10 +367,36 @@ exports.updateTasks = function (req, res) {
     // });
 }
 
+
+exports.updateIndividualTasks = function (req, res) {
+    Task.findOne({'_id':mongoose.Types.ObjectId(req.param('id'))}, function (err, task) {
+        if (err) return console.error(err);
+        task['taskname'] = req.body.taskname;  
+        task.save()
+        console.log(task)
+    });
+}
+
 exports.showSingleTask = function (req, res) {
     Task.findOne({'_id':mongoose.Types.ObjectId(req.param('id'))}, function (err, task) {
         if (err) return console.error(err);
         // res.send(task);
-        res.render('individual-tasks' , {tasks: task})
+        res.render('individual-tasks' , {tasks: task, user: req.user})
     });
 };
+
+
+exports.deleteTask = function (req, res) {
+    Task.remove({'_id':mongoose.Types.ObjectId(req.param('id'))}, function (err, task) {
+        if (err) return console.error(err); // change to 404 page
+        res.json({success: true});
+    });
+}
+
+exports.deleteProject = function (req, res) {
+    Project.remove({'_id':mongoose.Types.ObjectId(req.param('id'))}, function (err, project) {
+        if (err) return console.error(err); // change to 404 page
+        res.json({success: true});
+    });
+}
+

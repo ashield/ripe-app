@@ -14,6 +14,7 @@
     "express-handlebars": "^1.2.2",
     "express-session": "^1.10.4",
     "express-sessions": "^1.0.5",
+    "lodash": "^3.6.0",
     "method-override": "^2.3.2",
     "mongoose": "^3.8.25",
     "mongoose-relationship": "^0.1.4",
@@ -23,7 +24,8 @@
     "passport-google": "^0.3.0",
     "passport-local": "^1.0.0",
     "passport-local-mongoose": "^1.0.0",
-    "serve-favicon": "~2.2.0"
+    "serve-favicon": "~2.2.0",
+    "slideout": "^0.1.5"
   },
   "devDependencies": {
     "grunt": "^0.4.5",

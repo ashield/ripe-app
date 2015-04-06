@@ -71,13 +71,20 @@ app.route('/projects/:id')
     // .post(ripe.createTask)
 
 // add tasks to a project
-    .post(ripe.ProjectUpdateTasks);
+    .post(ripe.ProjectUpdateTasks)
+
+    .delete(ripe.deleteProject);
+
 
 // Individual task test
 app.route('/projects/:id/:id')
 // app.route('/projects/:project_id/tasks/:id')
     // view a project item
     .get(ripe.showTask)
+
+    .post(ripe.updateIndividualTasks)
+
+    .delete(ripe.deleteTask);
 
 app.route('/tasks/:id')
     .post(ripe.updateTasks)
@@ -98,7 +105,13 @@ app.route('/users/:id')
     // view a project item
     .get(ripe.myTasks)
 
-    // .post(ripe.updateTasks)
+    .post(ripe.createTask)
+
+
+app.route('/users/:id/:id')
+    .post(ripe.updateIndividualTasks)
+
+    .delete(ripe.deleteTask);
 
 app.route('/login')
     .get(ripe.login)

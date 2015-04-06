@@ -9,7 +9,27 @@
 
 </head>
 <body>
-	<div class="container">
+<div class="container">
+
+	<!-- Navigation -->
+<nav id="slide-menu">
+	<ul>
+		<a href="/"><li class="timeline">Home</li></a>
+		<a href="/projects"><li class="events">Projects</li></a>
+		<a href="/users/{{user._id}}"><li class="calendar">My Tasks</li></a>
+		<a href="/users/{{user._id}}"><li class="sep settings">Settings</li></a>
+		<a href="/logout"><li class="logout">Logout</li></a>
+	</ul>
+</nav>
+<!-- Content panel -->
+<div id="content">
+	<div class="menu-trigger">
+		<img src="/images/menu.svg" alt="">
+	</div>
+	    
+	  
+	
+	
 		<div class="hero">
 			<div class="content-contain">
 				<h1>{{title}}</h1>
@@ -17,11 +37,10 @@
 		</div>
 		<div class="content-contain">
 			{{{body}}}
-			<a href="/logout">Logout</a>
 		</div>
 
 	</div>
-
+</div>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<script src="/javascripts/jquery.editinplace.js"></script>
 	<script src='/javascripts/script.js'></script>
