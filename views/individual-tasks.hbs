@@ -1,7 +1,12 @@
 <div class="content">
-	<div class="individual-tasks">
+	<div class="individual-tasks individual-project">
 		<figure>
 		   <div class="info">
+			{{#unless tasks}}
+				<p class="no-tasks-warn">There are currently no tasks assigned to you.
+				Please click below to add a task.
+				</p>
+			{{/unless}}
 			   <!-- 	<p class="description">{{project.description}}</p> -->
 		       {{#each tasks}}
 		       <div class="task">
@@ -10,28 +15,16 @@
 			{{#if _project}}
 		       <p class="project" data-id="{{_id}}">project: {{_project}}</p>
 		    {{/if}}
-		       <p class="complete" data-id="{{_id}}">complete: {{complete}}</p>
+		       <p class="complete" data-id="{{_id}}">complete: {{complete}}
+					<input type="checkbox" id="complete" class="cBox" name="complete"data-id="{{_id}}" />
+		       </p>
 		       <span class="delete" data-id="{{_id}}">&times;</span>
 		       {{/each}}
 		   		</div>
+		   		    <p class="project-add">Add task</p>
+		   			{{> add-task-form}}
 		    </div>
-		</figure>
 
-		    <p class="project-add">Add task</p>
-		    <form class="project-form" method="POST">
-		    <div>
-		    	<div class="field">
-		    		<label for="taskname">Task Name</label>
-		    		<input type="text" name="taskname" id="taskname" required />
-		    	</div>
-		    	<div class="field"></div>
-		    		<label for="taskdescription">Task Description</label>
-		    		<textarea name="taskdescription" id="taskdescription" required></textarea>
-		    </div>
-		    <div class="form-actions">
-		    	<input type="submit" class="save button" value="Save">
-		    	<button type="cancel" class="cancel">Cancel</button>
-		    </div>
-		</form>
+		</figure>
 	</div>
 </div>

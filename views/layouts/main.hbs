@@ -14,11 +14,11 @@
 	<!-- Navigation -->
 <nav id="slide-menu">
 	<ul>
-		<a href="/"><li class="timeline">Home</li></a>
-		<a href="/projects"><li class="events">Projects</li></a>
-		<a href="/users/{{user._id}}"><li class="calendar">My Tasks</li></a>
-		<a href="/users/{{user._id}}"><li class="sep settings">Settings</li></a>
-		<a href="/logout"><li class="logout">Logout</li></a>
+		<a href="/"><li class="menu-home">Home</li></a>
+		<a href="/projects"><li class="menu-projects">Projects</li></a>
+		<a href="/users/{{user._id}}"><li class="menu-tasks">My Tasks</li></a>
+		<a href="/settings/{{user._id}}"><li class="sep menu-settings">Settings</li></a>
+		<a href="/logout"><li class="menu-logout">Logout</li></a>
 	</ul>
 </nav>
 <!-- Content panel -->
@@ -31,8 +31,9 @@
 	
 	
 		<div class="hero">
-			<div class="content-contain">
+			<div class="hero--content-contain">
 				<h1>{{title}}</h1>
+				<p>{{text}}</p>
 			</div>
 		</div>
 		<div class="content-contain">

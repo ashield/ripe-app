@@ -24,7 +24,7 @@ app.engine('hbs', expressHbs({extname: 'hbs', defaultLayout: 'main.hbs'}));
 app.set('view engine', 'hbs');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(favicon(__dirname + '/public/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -126,6 +126,10 @@ app.route('/register')
 
 app.route('/logout')
     .get(ripe.logout)
+
+// SETTINGS
+app.route('/settings/:id')
+    .get(ripe.settings)
 
 
 

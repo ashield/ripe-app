@@ -120,7 +120,7 @@ $(document).ready(function(){
 
 	function deleteProject(id) {
 		var project_id = window.location.pathname.substring("/projects/".length);
-		var redirectURL = "/projects"
+		var redirectURL = "/projects";
 	    $.ajax({
 	        type: 'DELETE',
 	        url: '/projects/' + project_id,
@@ -135,12 +135,34 @@ $(document).ready(function(){
 
 	// Form inject for creating project tasks
 	$('.project-add').click(function () {
-		console.log('click')
 		$('.project-form').addClass('show');
 	})
 	$('.cancel').click(function () {
 		$('.project-form').removeClass('show');
-	})
+	});
+
+
+
+	$('.complete').on('click', '.cBox', function updateComplete() {
+		// will need to loop through all the checkboxes so they don't interfer with each other
+		var x=$("#complete").is(":checked");
+		var user_id = window.location.pathname.substring("/users/".length);
+		// var payload = $(this).cBox.val();
+		// var payload = $(this).text();
+			if (x == true) {
+				console.log($("input[type='checkbox']").val());
+				$.ajax({
+				  type: "POST",
+					url: '/users/' + user_id + '/' + $(this).data('id'),
+				  data: {complete: true}, // JSON.stringify
+				  success: null, //console.log('/tasks/' + $(this).data('id')),
+				  dataType: 'json'
+				});
+			} else {
+				console.log($("input[type='checkbox']").val());
+			}
+
+	});
 
 
 

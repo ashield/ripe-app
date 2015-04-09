@@ -1,16 +1,24 @@
 <div class="dashboard">
-	<figure>
-		<h2><a href="/projects/">Projects</a></h2>
-	</figure>
+	<a href="/projects/">
+		<figure>
+			<h2>Projects</h2>
+			<img class="svg-icon" src="images/launch.svg" alt="">
+		</figure>
+	</a>
 		
+	<a href="/users/{{user._id}}">
 	<figure>
-		<h2><a href="/users/{{user._id}}">My Tasks</a></h2>
+		<h2>My Tasks</h2>
+		<img class="svg-icon" src="images/person.svg" alt="">
 	</figure>
+	</a>
 	
-	<figure>
-		<!-- {{#if user}} -->
- 		<h2><a href="/users/{{user._id}}">Settings</a>
- 		</h2>
- 		<!-- {{/if}} -->
-	</figure>
+	<a href="/settings/{{user._id}}">
+		<figure>
+			<!-- {{#if user}} -->
+	 		<h2>Settings</h2>
+	 		<!-- {{/if}} -->
+	 		<img class="svg-icon" src="images/settings.svg" alt="">
+		</figure>
+	</a>
 </div>
