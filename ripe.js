@@ -179,9 +179,26 @@ exports.allProjects = function (req, res) {
                 // console.log(taskname)
             }
 
-            // console.log(tasks[0].taskname)
+            // console.log(tasks)
 
+            var temp = [];
 
+            for (var i=0; i < tasks.length; i ++) {
+               // console.log(tasks[i]._project)
+                Project.findOne({_id:'55284628cce14ec738515602'}, function (err, project) {
+                    // console.log(project)
+                    if (err) return console.error(err);
+                    // console.log(tasks[i]._project)
+                var tempObj = {
+                    project: project, task: tasks[i]
+                    }
+                temp.push(tempObj);
+                // console.log(tempObj)
+          
+                })
+            }
+
+            console.log(temp)
 
 
             // if (req.user) {
@@ -312,14 +329,17 @@ exports.myTasks = function (req, res) {
     	if (err) return console.error(err);
 
     	Task.find({user: user.username}, function (err, tasks) {
-    		if (err) return console.error(err);
+    		if (err) return console.error(err)
+
+            // Project.findOne({_id: tasks._project}, function (err, project) {
+            //     console.log(project);
 
             if (req.user) {
                     res.render('individual-tasks', {tasks: tasks, text: "These are all the tasks assigned to you either individually or through projects", title: user.username + "'s tasks", user: req.user});
                 } else {
                     res.redirect('/login');
                 }
-    		
+    		// });
 
     	});
     });
@@ -348,8 +368,10 @@ exports.updateTasks = function (req, res) {
 exports.updateIndividualTasks = function (req, res) {
     Task.findOne({'_id':mongoose.Types.ObjectId(req.param('id'))}, function (err, task) {
         if (err) return console.error(err);
-        task['taskname'] = req.body.taskname;
-        task['complete'] = req.body.complete;    
+        if (req.body.taskname == undefined) {
+            task['complete'] = req.body.complete;
+        } else { task['taskname'] = req.body.taskname;  
+        }  
         task.save()
         console.log(task)
     });
