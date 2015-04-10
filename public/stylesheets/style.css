@@ -76,9 +76,12 @@ body {
     min-height: 200px; }
   .projects .name {
     font-size: 22px;
-    padding: 10px 0; }
+    padding: 10px 0;
+    width: 80%; }
   .projects .description {
     font-size: 13px; }
+  .projects .form-actions {
+    padding: 15px 0; }
   .projects .task-container {
     padding: 20px 0; }
   .projects .tasks-heading {
@@ -125,6 +128,28 @@ body {
 
 .individual-project {
   text-align: left; }
+  .individual-project .task {
+    position: relative; }
+  .individual-project .project-taskname {
+    font-size: 22px;
+    padding: 10px 0;
+    width: 80%;
+    cursor: pointer; }
+    .individual-project .project-taskname:hover {
+      background: #dddddd; }
+  .individual-project .taskdescription {
+    font-size: 13px;
+    padding-bottom: 10px; }
+  .individual-project .form-actions {
+    padding: 15px 0; }
+  .individual-project select {
+    padding: 10px 0; }
+  .individual-project .controls {
+    position: absolute;
+    right: 0;
+    top: 29px; }
+    .individual-project .controls .complete, .individual-project .controls .delete {
+      display: inline; }
   .individual-project figure {
     width: 900px;
     background: #fefefe;
@@ -143,9 +168,11 @@ body {
 .project-form p {
   margin-bottom: 10px; }
 .project-form .name {
-  padding: 20px 0; }
+  padding: 20px 0 10px; }
 .project-form .description {
-  padding: 20px 0; }
+  padding: 10px 0 20px; }
+.project-form .form-actions {
+  padding: 15px 0; }
 
 .new {
   text-align: left; }
@@ -162,13 +189,42 @@ body {
     overflow: hidden; }
   .new p {
     margin-bottom: 15px; }
-  .new .name {
-    padding: 20px; }
   .new .description {
-    padding: 20px; }
+    padding: 10px 0 20px; }
+
+.editInPlace-active input {
+  font-family: inherit;
+  font-size: inherit;
+  width: inherit;
+  padding: 0px;
+  background-color: inherit;
+  border: 0px; }
+  .editInPlace-active input:focus, .editInPlace-active input:active {
+    border: none; }
 
 .no-tasks-warn {
   padding-bottom: 20px; }
+
+.individual-tasks .task {
+  position: relative; }
+.individual-tasks .taskname {
+  font-size: 22px;
+  padding: 10px 0;
+  width: 80%;
+  cursor: pointer; }
+  .individual-tasks .taskname:hover {
+    background: #dddddd; }
+.individual-tasks .task-description {
+  font-size: 13px;
+  padding-bottom: 10px; }
+.individual-tasks .form-actions {
+  padding: 15px 0; }
+.individual-tasks .controls {
+  position: absolute;
+  right: 0;
+  top: 14px; }
+  .individual-tasks .controls .complete, .individual-tasks .controls .delete {
+    display: inline; }
 
 nav#slide-menu {
   position: fixed;

@@ -15,13 +15,15 @@
 			{{#if _project}}
 		       <p class="project" data-id="{{_id}}">project: {{_project}}</p>
 		    {{/if}}
+		    <div class="controls">
 		       <p class="complete" data-id="{{_id}}">complete: {{complete}}
 					<input type="checkbox" id="complete" class="cBox" name="complete"data-id="{{_id}}" />
 		       </p>
 		       <span class="delete" data-id="{{_id}}">&times;</span>
+		   </div>
 		       {{/each}}
 		   		</div>
-		   		    <p class="project-add">Add task</p>
+		   		    <p class="project-add">Add task:</p>
 		   			{{> add-task-form}}
 		    </div>
 

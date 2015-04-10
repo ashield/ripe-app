@@ -176,15 +176,20 @@ exports.allProjects = function (req, res) {
             /// console.log(tasks)
             for (var i=0; i < tasks.length; i ++) {
                 var taskname = tasks[i].taskname;
-                console.log(taskname)
+                // console.log(taskname)
             }
 
-            if (req.user) {
+            // console.log(tasks[0].taskname)
+
+
+
+
+            // if (req.user) {
                 // console.log(req.user.username);
                 res.render('projects', {projects: projects, title: 'Projects', text: "This is your current project overview. Click on a project to see more", tasks: tasks, user: req.user});
-            } else {
-                res.redirect('/login');
-            }
+            // } else {
+            //     res.redirect('/login');
+            // }
             
 
             });
@@ -244,12 +249,6 @@ exports.showOneProject = function (req, res) {
                 if (err) return console.error(err);
                 console.log(users);
            
-
-                // LOOK @ LODASH FOR THIS - could work better
-                // for (var i=0; i < tasks.length; i ++ ){
-                // }
-                // res.send(tasks)
-                // res.render('individual-tasks', {tasks: tasks, title: user.username});
                 res.render('individual-project', {project: project, title: project.name, tasks: tasks, users: users, user: req.user} );
             
                 });
@@ -264,7 +263,7 @@ exports.showOneProject = function (req, res) {
 exports.createTask = function(req, res) {
     var task = new Task({
         taskname: req.body.taskname,
-        // taskdescription: req.body.description,
+        taskdescription: req.body.description,
         user: req.user.username
 
      });

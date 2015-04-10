@@ -45,9 +45,9 @@ $.fn.editInPlace = function(options) {
 /// Required Options: Either url or callback, so the editor knows what to do with the edited values.
 $.fn.editInPlace.defaults = {
 	url:				"", // string: POST URL to send edited content
-	bg_over:			"#ffc", // string: background color of hover of unactivated editor
-	bg_out:				"transparent", // string: background color on restore from hover
-	hover_class:		"",  // string: class added to root element during hover. Will override bg_over and bg_out
+	// bg_over:			"#ffc", // string: background color of hover of unactivated editor
+	// bg_out:				"transparent", // string: background color on restore from hover
+	// hover_class:		"",  // string: class added to root element during hover. Will override bg_over and bg_out
 	show_buttons:		false, // boolean: will show the buttons: cancel or save; will automatically cancel out the onBlur functionality
 	save_button:		'<button class="inplace_save">Save</button>', // string: image button tag to use as “Save” button
 	cancel_button:		'<button class="inplace_cancel">Cancel</button>', // string: image button tag to use as “Cancel” button

@@ -13,8 +13,10 @@
 		       <select>
 				<option>{{user}}</option>
 		       </select>
+		       <div class="controls">
 		       <p class="complete">complete: {{complete}}</p>
 		       <span class="project-task-delete" data-id="{{_id}}">&times;</span>
+		       </div>
 		       {{/each}}
 		   		</div>
 				<br/>
@@ -24,7 +26,7 @@
 		    <p class="project-add">Add task</p>
 			{{> project-add-task-form}}
 		<div class="project-delete">
-			<span class="delete" data-id="{{_id}}">&times;</span>
+			<span class="delete" data-id="{{_id}}">&times; (delete project)</span>
 		</div>
 		</figure>
 	</div>
