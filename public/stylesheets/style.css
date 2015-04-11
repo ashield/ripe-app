@@ -144,12 +144,11 @@ body {
     padding: 15px 0; }
   .individual-project select {
     padding: 10px 0; }
-  .individual-project .controls {
+  .individual-project .controls .complete, .individual-project .controls .delete {
+    display: inline; }
+  .individual-project .save {
     position: absolute;
-    right: 0;
-    top: 29px; }
-    .individual-project .controls .complete, .individual-project .controls .delete {
-      display: inline; }
+    right: 0; }
   .individual-project figure {
     width: 900px;
     background: #fefefe;
@@ -164,6 +163,8 @@ body {
   .individual-project h1 {
     top: 60px;
     text-align: center; }
+  .individual-project .checked {
+    text-decoration: line-through; }
 
 .project-form p {
   margin-bottom: 10px; }

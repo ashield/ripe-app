@@ -9,15 +9,12 @@
 		       	<p class="tasks-heading">Tasks:</p>
 		       {{#each tasks}}
 		       <p class="tasks">{{this.taskname}}</p>
+		       <p class="user">{{this.user}}</p>
 		       {{/each}}
 		       </div>
 		    </div>
 			<a class="edit" href="/projects/{{id}}">edit</a>
 		</figure>
-	{{/each}}
-
-	{{#each tasks}}
-	<p class="tasks">{{this.taskname}}</p>
 	{{/each}}
 	   <a href="/projects/new/" class="new-circle">
 	       <p>+</p>

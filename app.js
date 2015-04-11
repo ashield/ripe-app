@@ -111,6 +111,8 @@ app.route('/users/:id')
 app.route('/users/:id/:id')
     .post(ripe.updateIndividualTasks)
 
+    .patch(ripe.checkOffTasks)
+
     .delete(ripe.deleteTask);
 
 app.route('/login')

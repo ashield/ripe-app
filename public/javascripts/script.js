@@ -144,25 +144,35 @@ $(document).ready(function(){
 
 
 	$('.complete').on('click', '.cBox', function updateComplete() {
-		// will need to loop through all the checkboxes so they don't interfer with each other
-		var x=$("#complete").is(":checked");
 		var user_id = window.location.pathname.substring("/users/".length);
-		// var payload = $(this).cBox.val();
-		// var payload = $(this).text();
-			if (x == true) {
-				console.log($("input[type='checkbox']").val());
+			if ($(":checkbox[data-id='"+$(this).data("id")+"']").is(":checked")) {
 				$.ajax({
-				  type: "POST",
+				  type: "PATCH",
 					url: '/users/' + user_id + '/' + $(this).data('id'),
-				  data: {complete: true}, // JSON.stringify
-				  success: null, //console.log('/tasks/' + $(this).data('id')),
+				  data: {complete: true},
+				  success: null,
 				  dataType: 'json'
 				});
-			} else {
-				console.log($("input[type='checkbox']").val());
+
+				$(".taskname[data-id='"+$(this).data("id")+"']").addClass('checked')
+				console.log('checked')
 			}
 
+	 		if (!$(":checkbox[data-id='"+$(this).data("id")+"']").is(":checked")) {
+				$.ajax({
+				  type: "PATCH",
+					url: '/users/' + user_id + '/' + $(this).data('id'),
+				  data: {complete: false},
+				  success: null,
+				  dataType: 'json'
+				});
+				$(".taskname[data-id='"+$(this).data("id")+"']").removeClass('checked')
+				console.log('unchecked')
+			}
 	});
+
+
+
 
 
 
