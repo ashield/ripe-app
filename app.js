@@ -84,11 +84,11 @@ app.route('/projects/:id/:id')
 
     .post(ripe.updateIndividualTasks)
 
+    .put(ripe.checkOffTasks)
+
     .delete(ripe.deleteTask);
 
 app.route('/tasks/:id')
-    .post(ripe.updateTasks)
-
     .get(ripe.showSingleTask)
 
 
@@ -111,7 +111,7 @@ app.route('/users/:id')
 app.route('/users/:id/:id')
     .post(ripe.updateIndividualTasks)
 
-    .patch(ripe.checkOffTasks)
+    .put(ripe.checkOffTasks)
 
     .delete(ripe.deleteTask);
 
@@ -169,7 +169,9 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-mongoose.connect('mongodb://localhost/ripedb');
+// mongoose.connect('mongodb://localhost/ripedb');
+
+mongoose.connect('mongodb://ripeuser:ripepassword@ds061721.mongolab.com:61721/ripedb');
 
 var db = mongoose.connection;
 db.on('error', function callback () {

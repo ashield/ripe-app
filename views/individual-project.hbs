@@ -4,16 +4,26 @@
 		   <div class="info">
 			   	<p class="description">Project description:<br/> {{project.description}}</p>
 			   	<br/>
-			   	<div class="task">
+			   	
 			   	<p>Tasks:</p>
 		       {{#each tasks}}
-		       <p class="project-taskname" data-id="{{_id}}">{{taskname}}</p>
+		       <div class="task">
+		       	{{#if complete}}
+		       	<p class="project-taskname checked" data-id="{{_id}}">{{taskname}}</p>
+		       	{{else}}
+		       	<p class="project-taskname" data-id="{{_id}}">{{taskname}}</p>
+		       	{{/if}}
 		       <p class="taskdescription">{{taskdescription}}</p>
-		       <!-- <p class="user">{{user}}</p> -->
 				<p class="user">{{user}}</p>
 
 		       <div class="controls">
-		       <p class="complete">complete: {{complete}}</p>
+		        <p class="project-complete" data-id="{{_id}}">
+          			{{#if complete}}
+          				<input type="checkbox" id="complete" class="cBox" name="complete" data-id="{{_id}}" checked />
+          			{{else}}
+          				<input type="checkbox" id="complete" class="cBox" name="complete" data-id="{{_id}}" />
+          		    {{/if}}					
+   		       </p>
 		       <span class="project-task-delete" data-id="{{_id}}">&times;</span>
 		       </div>
 		       {{/each}}
@@ -25,7 +35,7 @@
 		    <p class="project-add">Add task</p>
 			{{> project-add-task-form}}
 		<div class="project-delete">
-			<span class="delete" data-id="{{_id}}">&times; (delete project)</span>
+			<span class="delete" data-id="{{_id}}">remove project &times;</span>
 		</div>
 		</figure>
 	</div>

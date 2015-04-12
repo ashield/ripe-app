@@ -67,58 +67,33 @@ $(document).ready(function(){
 		}
 	});
 
-	$(function () {
-	    $('.task').on('click', '.delete', function (evt) {
-	        // if (confirm('Are you sure you want to delete this item?')) {
-	            deleteTask($(evt.target).data('id'));
-	        // }
-	    });
-	});
 
-	function deleteTask(id) {
+	$('.controls').on('click', '.delete', function deleteTask() {
 		var user_id = window.location.pathname.substring("/users/".length);
 	    $.ajax({
 	        type: 'DELETE',
-	        url: '/users/' + user_id + '/' + $('.taskname').data('id'),
+	        url: '/users/' + user_id + '/' + $(this).data('id'),
 	    }).fail(function (err) {
 	        console.error(err);
-	    }).done(function () {
+	    })  .done(function () {
 	        location.reload();
-	    });
-	    console.log($('.taskname').data('id'))
-	}
-
-	$(function () {
-	    $('.task').on('click', '.project-task-delete', function (evt) {
-	        // if (confirm('Are you sure you want to delete this item?')) {
-	            deleteProjectTask($(evt.target).data('id'));
-	        // }
 	    });
 	});
 
-	function deleteProjectTask(id) {
+	$('.controls').on('click', '.project-task-delete', function deleteTask() {
 		var project_id = window.location.pathname.substring("/projects/".length);
 	    $.ajax({
 	        type: 'DELETE',
-	        url: '/projects/' + project_id + '/' +  $('.project-task-delete').data('id'),
+	        url: '/projects/' + project_id + '/' +  $(this).data('id'),
 	    }).fail(function (err) {
 	        console.error(err);
 	    }).done(function () {
 	        location.reload();
 	    });
-	    // console.log($('.taskname').data('id'))
-	}
-
-
-	$(function () {
-	    $('.project-delete').on('click', '.delete', function (evt) {
-	        // if (confirm('Are you sure you want to delete this item?')) {
-	            deleteProject($(evt.target).data('id'));
-	        // }
-	    });
 	});
 
-	function deleteProject(id) {
+
+	$('.project-delete').on('click', '.delete', function deleteTask() {
 		var project_id = window.location.pathname.substring("/projects/".length);
 		var redirectURL = "/projects";
 	    $.ajax({
@@ -129,8 +104,7 @@ $(document).ready(function(){
 	    }).done(function () {
 	        window.location = redirectURL;
 	    });
-	    // console.log($('.taskname').data('id'))
-	}
+	});
 
 
 	// Form inject for creating project tasks
@@ -147,7 +121,7 @@ $(document).ready(function(){
 		var user_id = window.location.pathname.substring("/users/".length);
 			if ($(":checkbox[data-id='"+$(this).data("id")+"']").is(":checked")) {
 				$.ajax({
-				  type: "PATCH",
+				  type: "PUT",
 					url: '/users/' + user_id + '/' + $(this).data('id'),
 				  data: {complete: true},
 				  success: null,
@@ -160,7 +134,7 @@ $(document).ready(function(){
 
 	 		if (!$(":checkbox[data-id='"+$(this).data("id")+"']").is(":checked")) {
 				$.ajax({
-				  type: "PATCH",
+				  type: "PUT",
 					url: '/users/' + user_id + '/' + $(this).data('id'),
 				  data: {complete: false},
 				  success: null,
@@ -171,10 +145,33 @@ $(document).ready(function(){
 			}
 	});
 
+	$('.project-complete').on('click', '.cBox', function updateComplete() {
+		var project_id = window.location.pathname.substring("/projects/".length);
+			if ($(":checkbox[data-id='"+$(this).data("id")+"']").is(":checked")) {
+				$.ajax({
+				  type: "PUT",
+					url: '/projects/' + project_id + '/' +  $(this).data('id'),
+				  data: {complete: true},
+				  success: null,
+				  dataType: 'json'
+				});
 
+				$(".project-taskname[data-id='"+$(this).data("id")+"']").addClass('checked')
+				console.log('checked')
+			}
 
-
-
+	 		if (!$(":checkbox[data-id='"+$(this).data("id")+"']").is(":checked")) {
+				$.ajax({
+				  type: "PUT",
+					url: '/projects/' + project_id + '/' +  $(this).data('id'),
+				  data: {complete: false},
+				  success: null,
+				  dataType: 'json'
+				});
+				$(".project-taskname[data-id='"+$(this).data("id")+"']").removeClass('checked')
+				console.log('unchecked')
+			}
+	});
 
 });
 

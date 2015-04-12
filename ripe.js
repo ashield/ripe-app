@@ -38,14 +38,6 @@ var Users = require('./models/user');
 
 // LOGIN
 
-// function loggedIn(req, res, next) {
-//     if (req.user) {
-//         next();
-//     } else {
-//         res.redirect('/login');
-//     }
-// }
-
 exports.login = function (req, res) {
     res.render('login', { title : "Login" });
 }
@@ -143,10 +135,7 @@ exports.ProjectUpdateTasks = function (req, res) {
             // console.log(project.tasks);
        });
 
-    // user.save(function (err, user) {
-    //  if (err) return console.error(err);
         Users.findOne({ username: task.user})
-        .populate('_tasks')  // populate isn't actually working, push is doing this
         .exec(function (err, user) {
           if (err) return console.error(err);
           if (user){
@@ -156,7 +145,6 @@ exports.ProjectUpdateTasks = function (req, res) {
           console.log(user)
           
         });
-    // });
 
     res.redirect(req.get('referer'));
 
@@ -165,34 +153,30 @@ exports.ProjectUpdateTasks = function (req, res) {
 
 
 exports.allProjects = function (req, res) {
-    // Project.find(function (err, projects) {
-        // if (err) return console.error(err);
-        Project.find({})
-        .populate('tasks')
-        .exec(function(error, data) {
-            // console.log(JSON.stringify(tasks, null, "\t"))
-        var output = [];
-            data.forEach(function(o) {
-                output.push(o.tasks);
-            });
+    Project.find({})
+    .populate('tasks')
+    .exec(function(error, data) {
+        // console.log(JSON.stringify(tasks, null, "\t"))
+    var output = [];
+        data.forEach(function(o) {
+            output.push(o.tasks);
+        });
 
-            // console.log(output)
+        // console.log(output)
 
-         //   if (req.user) {
-                    res.render('projects', {projects: data, title: 'Projects', text: "This is your current project overview. Click on a project to see more", tasks: output, user: req.user});
-          //      } else {
-            //        res.redirect('/login');
-             //   }
-            
-            })
+       if (req.user) {
+                res.render('projects', {projects: data, title: 'Projects', text: "This is your current project overview. Click on a project to see more", tasks: output, user: req.user});
+           } else {
+               res.redirect('/login');
+           }
+        
+        })
 
 };
 
 exports.showOneProject = function (req, res) {
     Project.findOne({'_id':mongoose.Types.ObjectId(req.param('id'))}, function (err, project) {
     	if (err) return console.error(err);
-    	// console.log(project.tasks[0].taskname)
-    	// res.send(project);
 
             Task.find({_project: project._id}, function (err, tasks) {
                 if (err) return console.error(err);
@@ -208,20 +192,17 @@ exports.showOneProject = function (req, res) {
     });
 };
 
-
-
 // TASKS
 
 exports.createTask = function(req, res) {
     var task = new Task({
         taskname: req.body.taskname,
-        taskdescription: req.body.description,
+        taskdescription: req.body.taskdescription,
         user: req.user.username
 
      });
         task.save(function (err, task) {
         if (err) return console.error(err);
-        console.log(req.user.username)
         res.redirect(req.get('referer'));
 
     });
@@ -273,36 +254,15 @@ exports.myTasks = function (req, res) {
                        output.push(o.tasks);
                    });  
 
-            // if (req.user) {
-                // res.send(tasks)
+            if (req.user) {
                     res.render('individual-tasks', {tasks: data,  text: "These are all the tasks assigned to you either individually or through projects", title: user.username + "'s tasks", user: req.user});
-                // } else {
-                //     res.redirect('/login');
-                // }
+                } else {
+                    res.redirect('/login');
+                }
     	
             })
     });
 };
-
-exports.updateTasks = function (req, res) {
-	// fetch a project
-
-	/* create a task */
-	var project_id = req.body.project_id;
-	var task_name = req.body.taskname;
-	var project = findProjectById(req.params('id'));
-	console.error(project);
-	res.json({success: "created..."})
-	/* add it to projet tasks */
-    // Task.findOne({'_id':mongoose.Types.ObjectId(req.param('id'))}, function (err, task) {
-    //     if (err) return console.error(err);
-		// 		console.error(req.params);
-    //     task['taskname'] = req.body.taskname;
-    //     task.save()
-    //     res.send(task)
-    // });
-}
-
 
 exports.updateIndividualTasks = function (req, res) {
     Task.findOne({'_id':mongoose.Types.ObjectId(req.param('id'))}, function (err, task) {
@@ -310,6 +270,7 @@ exports.updateIndividualTasks = function (req, res) {
         task['taskname'] = req.body.taskname;
         task.save()
         console.log(task)
+        res.json({success: true});
     });
 }
 
@@ -318,6 +279,7 @@ exports.checkOffTasks = function (req, res) {
         if (err) return console.error(err);
         task['complete'] = req.body.complete;
         task.save()
+        res.json({success: true});
     });
 }
 

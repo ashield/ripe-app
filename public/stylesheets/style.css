@@ -127,7 +127,24 @@ body {
   text-align: center; }
 
 .individual-project {
-  text-align: left; }
+  text-align: left;
+  position: relative; }
+  .individual-project figure {
+    width: 900px;
+    background: #fefefe;
+    border: 2px solid #fcfcfc;
+    box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+    margin: 0 2px 15px;
+    padding: 15px;
+    padding-bottom: 10px;
+    transition: opacity .4s ease-in-out;
+    display: inline-block;
+    overflow: hidden; }
+  .individual-project .info {
+    position: relative; }
+  .individual-project h1 {
+    top: 60px;
+    text-align: center; }
   .individual-project .task {
     position: relative; }
   .individual-project .project-taskname {
@@ -144,27 +161,18 @@ body {
     padding: 15px 0; }
   .individual-project select {
     padding: 10px 0; }
-  .individual-project .controls .complete, .individual-project .controls .delete {
-    display: inline; }
-  .individual-project .save {
+  .individual-project .controls {
     position: absolute;
-    right: 0; }
-  .individual-project figure {
-    width: 900px;
-    background: #fefefe;
-    border: 2px solid #fcfcfc;
-    box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
-    margin: 0 2px 15px;
-    padding: 15px;
-    padding-bottom: 10px;
-    transition: opacity .4s ease-in-out;
-    display: inline-block;
-    overflow: hidden; }
-  .individual-project h1 {
-    top: 60px;
-    text-align: center; }
+    right: 0;
+    top: 14px; }
+    .individual-project .controls .project-complete, .individual-project .controls .delete {
+      display: inline; }
   .individual-project .checked {
     text-decoration: line-through; }
+  .individual-project .project-delete {
+    position: absolute;
+    right: 0;
+    bottom: 0; }
 
 .project-form p {
   margin-bottom: 10px; }
@@ -196,12 +204,21 @@ body {
 .editInPlace-active input {
   font-family: inherit;
   font-size: inherit;
+  font-weight: inherit;
   width: inherit;
-  padding: 0px;
+  padding: 0;
+  margin: 0px;
   background-color: inherit;
-  border: 0px; }
+  font-weight: normal;
+  border: 0;
+  border-style: solid;
+  margin: 0;
+  outline: 0;
+  vertical-align: middle; }
   .editInPlace-active input:focus, .editInPlace-active input:active {
-    border: none; }
+    border: 0;
+    border-style: none;
+    outline: 0; }
 
 .no-tasks-warn {
   padding-bottom: 20px; }
@@ -209,6 +226,8 @@ body {
 .individual-tasks .task {
   position: relative; }
 .individual-tasks .taskname {
+  height: 25px;
+  line-height: 25px;
   font-size: 22px;
   padding: 10px 0;
   width: 80%;

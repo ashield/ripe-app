@@ -10,7 +10,11 @@
 			   <!-- 	<p class="description">{{project.description}}</p> -->
 		       {{#each tasks}}
 		       <div class="task">
+		       	{{#if complete}}
+		       <p class="taskname checked" data-id="{{_id}}">{{taskname}}</p>
+		       {{else}}
 		       <p class="taskname" data-id="{{_id}}">{{taskname}}</p>
+		       {{/if}}	
 		       <p class="task-description" data-id="{{_id}}">{{taskdescription}}</p>
 			{{#if _project}}
 		       <p class="project" data-id="{{_id}}">project: {{this._project.name}}</p>
@@ -18,14 +22,11 @@
 
 		    <div class="controls">
 		       <p class="complete" data-id="{{_id}}">
-		       			{{#if complete}}
-		       				<input type="checkbox" id="complete" class="cBox" name="complete" data-id="{{_id}}"  checked />complete: {{complete}}
-		       			{{else}}
-		       				<input type="checkbox" id="complete" class="cBox" name="complete" data-id="{{_id}}" />complete: {{complete}}
-		       		    {{/if}}
-
-
-					
+       			{{#if complete}}
+       				<input type="checkbox" id="complete" class="cBox" name="complete" data-id="{{_id}}" checked />
+       			{{else}}
+       				<input type="checkbox" id="complete" class="cBox" name="complete" data-id="{{_id}}" />
+       		    {{/if}}					
 		       </p>
 		       <span class="delete" data-id="{{_id}}">&times;</span>
 		   </div>
