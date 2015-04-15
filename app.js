@@ -169,9 +169,9 @@ app.use(function(err, req, res, next) {
 
 module.exports = app;
 
-mongoose.connect('mongodb://localhost/ripedb');
+// mongoose.connect('mongodb://localhost/ripedb');
 
-// mongoose.connect('mongodb://ripeuser:ripepassword@ds061721.mongolab.com:61721/ripedb');
+mongoose.connect('mongodb://ripeuser:ripepassword@ds061721.mongolab.com:61721/ripedb');
 
 var db = mongoose.connection;
 db.on('error', function callback () {
