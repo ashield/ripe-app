@@ -150,8 +150,7 @@ body.menu-active div#content .menu-trigger {
     font-weight: 300;
     color: #fff;
     background: #2B812F;
-    transition: .5s;
-    padding: 7px; }
+    transition: .5s; }
     .admin-form button:hover, .admin-form button:focus {
       background: #319436;
       cursor: pointer; }
