@@ -2,10 +2,16 @@
 	<div class="individual-project">
 		<figure>
 		   <div class="info">
-			   	<p class="description">Project description:<br/> {{project.description}}</p>
-			   	<br/>
-			   	
-			   	<p>Tasks:</p>
+			   	<div class="description">
+			   		<h3>Project description:</h3> 
+			   		<p>{{project.description}}</p>
+			   	</div>
+			   	<h3>Tasks:</h3>
+			   	{{#unless tasks}}
+			   		<p class="no-tasks-warn">There are currently no tasks in this project.
+			   		Please click below to add a task.
+			   		</p>
+			   	{{/unless}}
 		       {{#each tasks}}
 		       <div class="task">
 		       	{{#if complete}}
@@ -14,7 +20,7 @@
 		       	<p class="project-taskname" data-id="{{_id}}">{{taskname}}</p>
 		       	{{/if}}
 		       <p class="taskdescription">{{taskdescription}}</p>
-				<p class="user">{{user}}</p>
+				<p class="user">Assigned to: {{user}}</p>
 
 		       <div class="controls">
 		        <p class="project-complete" data-id="{{_id}}">
@@ -26,17 +32,17 @@
    		       </p>
 		       <span class="project-task-delete" data-id="{{_id}}">&times;</span>
 		       </div>
+				</div>
 		       {{/each}}
-		   		</div>
-				<br/>
-				<br/>
+		   		
+				    <div class="project-add">&plus;</div>
+					{{> project-add-task-form}}
+				<div class="project-delete">
+					<span class="delete" data-id="{{_id}}">&times;</span>
+				</div>
 		            
 		    </div>
-		    <p class="project-add">Add task</p>
-			{{> project-add-task-form}}
-		<div class="project-delete">
-			<span class="delete" data-id="{{_id}}">remove project &times;</span>
-		</div>
+		    
 		</figure>
 	</div>
 </div>

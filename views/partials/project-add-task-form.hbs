@@ -10,6 +10,7 @@
 	</div>
 	<div class="user">
 		<label for="user"><p>User</p>
+		 <div class="dropdown">
 		 <select name="user" id="user" placeholder="user" required>
         <option></option>
         {{#each users}}
@@ -17,10 +18,11 @@
 		{{/each}}
 		</label>
 		</select>
+		</div>
 	</div>
 </div>
 <div class="form-actions">
-	<input type="submit" class="save button" value="Save">
-	<button type="cancel" class="cancel">Cancel</button>
+	<button type="submit" class="save button">Save</button>
+	<a class="cancel">Cancel</a>
 </div>
 </form>

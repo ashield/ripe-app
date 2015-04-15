@@ -17,7 +17,6 @@ it("should redirect to login", function (done) {
 // tests to add
 	//register user - find way to get the id and then perform that other things from there
 
-
 // simulates a login and then accessing a page after auth
 
 describe('login and navigate to a secure page', function(){
@@ -65,6 +64,8 @@ describe('login and navigate to a secure page', function(){
     	// can user user ID already setup for local tesing
         var req = request(server).get('/users/55293ec61db8d47cb2488b05')
         .expect(200);
+
+        console.log(req.user._id)
 
         //attach the logged in cookies to the agent
         agent.attachCookies(req);

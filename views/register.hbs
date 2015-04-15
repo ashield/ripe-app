@@ -1,19 +1,20 @@
-<div class="content">
-    <div class="individual-project">
-    <figure>
-    <form role='form' action="/register" method="post" style='max-width: 300px;'>
-      <div class="form-group">
-          <input type='text' name="username" placeholder='Enter Username'>
+
+    <div class="admin-form">
+      <p class="heading">Register</p>
+      {{# if validation}}
+      <p class="validation">{{validation}}</p>
+      {{/if}}
+      <br/>
+    <form role='form' action="/register" method="post">
+      <div class="username">
+          <input type='text' name="username" placeholder='Username'>
       </div>
-      <div class="form-group">
+      <div class="password">
           <input type='password' name="password" placeholder='Password'>
       </div>
-      <button type="submit">Submit</button>
-      <a href='/'><button type="button">Cancel</button></a>
-      <br/>
-      <br/>
-      <p>All ready got a login?</p> 
+      <button type="submit">Register</button>
+    </form>
+    <br/>
       <a href="/login">Login now</a>
-    </figure>
     </div>
-  </div>
+

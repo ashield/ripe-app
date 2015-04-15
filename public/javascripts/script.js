@@ -1,6 +1,4 @@
-$(document).ready(function(){
-// TASK update and add new
-// var task = $(this).data('id');
+(function() {
 	$('.taskname').editInPlace({
 		callback : function (unused, enteredText) {
 			var payload = $(this).text();
@@ -10,7 +8,7 @@ $(document).ready(function(){
 				$.ajax({
 				  type: "POST",
 				  url: '/users/' + user_id,
-				  data: {taskname: payload, user: user_id },// JSON.stringify
+				  data: {taskname: payload, user: user_id },
 				  success: function() { window.location.reload(true); }, 
 				  dataType: 'json'
 				}); 
@@ -20,22 +18,20 @@ $(document).ready(function(){
 				$.ajax({
 				  type: "POST",
 				  url: '/users/' + user_id + '/' + $(this).data('id'),
-				  data: {taskname: payload }, // JSON.stringify
-				  success: null, //console.log('/tasks/' + $(this).data('id')),
+				  data: {taskname: payload },
+				  success: null,
 				  dataType: 'json'
 				}); 
 			}
-
 			console.log($(this).text())
 			console.log('/users/' + user_id + '/' + $(this).data('id'))
 			return enteredText;
 		}
 	});
+})();
 
 
-
-// PROJECT add new - inline
-
+(function() {
 	$('.project-taskname').editInPlace({
 		callback : function (unused, enteredText) {
 			var payload = $(this).text();
@@ -55,10 +51,9 @@ $(document).ready(function(){
 			else {
 			$.ajax({
 			  type: "POST",
-			  // url: '/projects/' + $(this).data('id'),
 				url: '/projects/' + project_id + '/' +  $(this).data('id'),
-			  data: {taskname: payload, project_id: project_id}, // JSON.stringify
-			  success: null, //console.log('/tasks/' + $(this).data('id')),
+			  data: {taskname: payload, project_id: project_id},
+			  success: null,
 			  dataType: 'json'
 			});
 		}
@@ -66,8 +61,9 @@ $(document).ready(function(){
 			return enteredText;
 		}
 	});
+})();
 
-
+(function() {
 	$('.controls').on('click', '.delete', function deleteTask() {
 		var user_id = window.location.pathname.substring("/users/".length);
 	    $.ajax({
@@ -79,7 +75,9 @@ $(document).ready(function(){
 	        location.reload();
 	    });
 	});
+})();
 
+(function() {
 	$('.controls').on('click', '.project-task-delete', function deleteTask() {
 		var project_id = window.location.pathname.substring("/projects/".length);
 	    $.ajax({
@@ -91,32 +89,41 @@ $(document).ready(function(){
 	        location.reload();
 	    });
 	});
+})();
 
-
+(function() {
 	$('.project-delete').on('click', '.delete', function deleteTask() {
 		var project_id = window.location.pathname.substring("/projects/".length);
 		var redirectURL = "/projects";
-	    $.ajax({
-	        type: 'DELETE',
-	        url: '/projects/' + project_id,
-	    }).fail(function (err) {
-	        console.error(err);
-	    }).done(function () {
-	        window.location = redirectURL;
-	    });
+		var warning = confirm("Are you sure you want to delete this entire project?");
+		if (warning == true) {
+		    $.ajax({
+		        type: 'DELETE',
+		        url: '/projects/' + project_id,
+		    }).fail(function (err) {
+		        console.error(err);
+		    }).done(function () {
+		        window.location = redirectURL;
+		    });
+		} else {
+		    return;
+		}
+
 	});
+})();
 
-
+(function() {
 	// Form inject for creating project tasks
 	$('.project-add').click(function () {
-		$('.project-form').addClass('show');
+		$('.project-form').toggleClass('show');
 	})
 	$('.cancel').click(function () {
 		$('.project-form').removeClass('show');
 	});
+})();
 
 
-
+(function() {
 	$('.complete').on('click', '.cBox', function updateComplete() {
 		var user_id = window.location.pathname.substring("/users/".length);
 			if ($(":checkbox[data-id='"+$(this).data("id")+"']").is(":checked")) {
@@ -144,7 +151,9 @@ $(document).ready(function(){
 				console.log('unchecked')
 			}
 	});
+})();
 
+(function() {
 	$('.project-complete').on('click', '.cBox', function updateComplete() {
 		var project_id = window.location.pathname.substring("/projects/".length);
 			if ($(":checkbox[data-id='"+$(this).data("id")+"']").is(":checked")) {
@@ -172,14 +181,8 @@ $(document).ready(function(){
 				console.log('unchecked')
 			}
 	});
+})();
 
-});
-
-
-
-/*
-  Slidemenu
-*/
 (function() {
 	var $body = document.body
 	, $menu_trigger = $body.getElementsByClassName('menu-trigger')[0];

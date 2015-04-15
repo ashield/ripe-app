@@ -39,7 +39,7 @@ var Users = require('./models/user');
 // LOGIN
 
 exports.login = function (req, res) {
-    res.render('login', { title : "Login" });
+    res.render('login', { title : "Login to Ripe App" });
 }
 
 exports.loginUser = function (req, res, next) {
@@ -54,6 +54,8 @@ exports.loginUser = function (req, res, next) {
      })(req, res, next);
    }
 
+   // return res.render("login", {title: 'Login to Ripe App', validation: 'Sorry. Something went wrong. Try again.'});
+
 // REGISTER
 
 exports.register = function (req, res) {
@@ -63,7 +65,7 @@ exports.register = function (req, res) {
 exports.registerUser = function (req, res) {
         Users.register(new Users({ username : req.body.username }), req.body.password, function(err, account) {
             if (err) {
-              return res.render("register", {title: "Sorry. That username already exists. Try again."});
+              return res.render("register", {title: 'Register for Ripe App', validation: 'Sorry. Something went wrong. Try again.'});
             }
 
             passport.authenticate('local')(req, res, function () {
@@ -84,7 +86,6 @@ exports.logout = function (req, res) {
 
 exports.dashboard = function (req, res) {
         if (req.user) {
-            console.log(req.user.username);
             res.render('index', {title: 'Ripe App', text: "Use Ripe to plan out any web project with simpicity", user: req.user});
         } else {
             res.redirect('/login');
@@ -124,15 +125,12 @@ exports.ProjectUpdateTasks = function (req, res) {
     
         task.save(function (err) {
           if (err) return console.error(err);
-          console.log(task)
-
         });
 
         project.tasks.push(task);
 
         project.save(function (err, project) {
             if (err) return console.error(err);
-            // console.log(project.tasks);
        });
 
         Users.findOne({ username: task.user})
@@ -141,8 +139,7 @@ exports.ProjectUpdateTasks = function (req, res) {
           if (user){
           user._tasks.push(task);
           user.save();
-      }
-          console.log(user)
+        }
           
         });
 
@@ -156,13 +153,10 @@ exports.allProjects = function (req, res) {
     Project.find({})
     .populate('tasks')
     .exec(function(error, data) {
-        // console.log(JSON.stringify(tasks, null, "\t"))
     var output = [];
         data.forEach(function(o) {
             output.push(o.tasks);
         });
-
-        // console.log(output)
 
        if (req.user) {
                 res.render('projects', {projects: data, title: 'Projects', text: "This is your current project overview. Click on a project to see more", tasks: output, user: req.user});
@@ -183,8 +177,6 @@ exports.showOneProject = function (req, res) {
 
             Users.find('username', function (err, users) {
                 if (err) return console.error(err);
-                // console.log(users);
-           
                 res.render('individual-project', {project: project, title: project.name, tasks: tasks, users: users, user: req.user} );
             
                 });
@@ -212,7 +204,6 @@ exports.createTask = function(req, res) {
 exports.showTask = function (req, res) {
     Task.findOne({'_id':mongoose.Types.ObjectId(req.param('id'))}, function (err, task) {
     	if (err) return console.error(err);
-    	// res.send(task);
         res.render('individual-tasks', { user: req.user} )
     });
 };
@@ -223,7 +214,6 @@ exports.showTask = function (req, res) {
 exports.allUsers = function (req, res) {
     Users.find(function (err, users) {
         if (err) return console.error(err);
-        // res.send(users);
         res.redirect('/login');
     })
 };
@@ -247,10 +237,8 @@ exports.myTasks = function (req, res) {
             Task.find({})
             .populate('_project')
             .exec(function(error, data) {
-                // console.log(JSON.stringify(tasks, null, "\t"))
             var output = [];
                 data.forEach(function(o) {
-                       // console.log(o.tasks);
                        output.push(o.tasks);
                    });  
 
@@ -286,7 +274,6 @@ exports.checkOffTasks = function (req, res) {
 exports.showSingleTask = function (req, res) {
     Task.findOne({'_id':mongoose.Types.ObjectId(req.param('id'))}, function (err, task) {
         if (err) return console.error(err);
-        // res.send(task);
         res.render('individual-tasks' , {tasks: task, user: req.user})
     });
 };

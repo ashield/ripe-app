@@ -7,22 +7,6 @@ body {
   body a {
     text-decoration: none; }
 
-.hero--content-contain {
-  position: relative;
-  max-width: 960px;
-  margin: auto;
-  padding: 60px 0;
-  text-align: center;
-  top: 30px;
-  color: #FFF;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 16px;
-  font-weight: 300;
-  font-family: inherit; }
-  .hero--content-contain h1 {
-    font-size: 30px;
-    margin-bottom: 15px; }
-
 .container {
   overflow: hidden; }
   .container .hero {
@@ -30,13 +14,151 @@ body {
     width: 100%;
     height: 300px;
     background-color: #444544; }
-  .container #columns {
-    display: flex;
-    column-width: 320px;
-    column-gap: 15px;
-    width: 90%;
-    max-width: 1100px;
-    margin: 50px auto; }
+    .container .hero .hero--content-contain {
+      position: relative;
+      max-width: 960px;
+      margin: auto;
+      padding: 60px 0;
+      text-align: center;
+      top: 30px;
+      color: #FFF;
+      font-family: 'Open Sans', sans-serif;
+      font-size: 16px;
+      font-weight: 300;
+      font-family: inherit; }
+      .container .hero .hero--content-contain h1 {
+        font-size: 30px;
+        margin-bottom: 15px; }
+
+nav#slide-menu {
+  position: fixed;
+  top: 0;
+  left: -100px;
+  bottom: 0;
+  display: block;
+  float: left;
+  width: 100%;
+  max-width: 284px;
+  height: 100%;
+  transition: all 300ms; }
+  nav#slide-menu ul {
+    display: block;
+    margin: 40px;
+    padding: 0;
+    list-style: none;
+    opacity: 0.5;
+    line-height: 40px;
+    transition: all 300ms; }
+    nav#slide-menu ul li {
+      color: #dfe5eb;
+      font-weight: 300;
+      padding: 6px 0;
+      cursor: pointer; }
+      nav#slide-menu ul li:hover {
+        color: #2b6481; }
+    nav#slide-menu ul li:before {
+      font-family: "ico";
+      font-style: normal;
+      font-weight: normal;
+      speak: none;
+      display: inline-block;
+      text-decoration: inherit;
+      width: 1em;
+      color: #2b6481;
+      margin-right: 12px;
+      text-align: center;
+      font-variant: normal;
+      font-size: 0.75em;
+      text-transform: none;
+      line-height: 1em; }
+    nav#slide-menu ul li.sep {
+      margin-top: 7px;
+      padding-top: 14px;
+      border-top: 1px solid #2b6481; }
+    nav#slide-menu ul li.menu-home:before {
+      content: '\e805'; }
+    nav#slide-menu ul li.menu-projects:before {
+      content: '\e802'; }
+    nav#slide-menu ul li.menu-tasks:before {
+      content: '\e800'; }
+    nav#slide-menu ul li.menu-settings:before {
+      content: '\e803'; }
+    nav#slide-menu ul li.menu-logout:before {
+      content: '\e804'; }
+
+body.menu-active nav#slide-menu {
+  left: 0px; }
+
+body.menu-active nav#slide-menu ul {
+  left: 0px;
+  opacity: 1; }
+
+div#content {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  overflow: scroll;
+  background: #fcfeff;
+  border-radius: 0;
+  box-sizing: border-box;
+  box-shadow: -3px 0 6px #373837;
+  transition: all 300ms; }
+  div#content div.menu-trigger {
+    position: fixed;
+    top: 10px;
+    left: 10px;
+    z-index: 2;
+    cursor: pointer;
+    transition: all 300ms; }
+
+body.menu-active div#content {
+  left: 284px; }
+
+body.menu-active div#content .menu-trigger {
+  left: 294px; }
+
+.admin-form {
+  text-align: center;
+  background: #fff;
+  width: 400px;
+  margin: auto;
+  margin-top: -60px;
+  padding: 50px;
+  box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4); }
+  .admin-form .heading {
+    font-size: 22px; }
+  .admin-form .validation {
+    padding: 15px 0 0;
+    color: #cd2b2b;
+    font-size: 14px; }
+  .admin-form input, .admin-form button {
+    width: 250px;
+    margin: 10px 10px 0 0;
+    padding: 10px 5px;
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+    background: #d3d3d3;
+    font-family: 'Open Sans', sans-serif;
+    color: #444544;
+    outline: none; }
+  .admin-form button {
+    width: 265px;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 300;
+    color: #fff;
+    background: #2B812F;
+    transition: .5s;
+    padding: 7px; }
+    .admin-form button:hover, .admin-form button:focus {
+      background: #319436;
+      cursor: pointer; }
+  .admin-form a {
+    text-decoration: none;
+    color: #9D9D9D;
+    font-size: 14px; }
 
 .dashboard figure {
   width: 275px;
@@ -48,7 +170,8 @@ body {
   padding-bottom: 10px;
   transition: opacity .4s ease-in-out;
   display: inline-block;
-  overflow: hidden; }
+  overflow: hidden;
+  border-radius: 5px; }
   .dashboard figure h2 {
     font-size: 22px;
     padding: 8px 0;
@@ -57,10 +180,36 @@ body {
   .dashboard figure .svg-icon {
     margin: 20px 0; }
 
+.editInPlace-active {
+  position: relative; }
+  .editInPlace-active input {
+    font-family: inherit;
+    font-size: inherit;
+    font-weight: inherit;
+    width: inherit;
+    padding: 0;
+    background-color: inherit;
+    font-weight: normal;
+    border: 0;
+    border-style: solid;
+    margin: 0;
+    outline: 0;
+    vertical-align: middle; }
+    .editInPlace-active input:focus, .editInPlace-active input:active {
+      border: 0;
+      border-style: none;
+      outline: 0; }
+  .editInPlace-active form {
+    position: relative;
+    top: -13px;
+    left: -5px; }
+
 .projects {
   text-align: left;
   margin-top: 100px;
   position: relative; }
+  .projects .info {
+    padding-bottom: 20px; }
   .projects figure {
     position: relative;
     width: 275px;
@@ -73,7 +222,8 @@ body {
     transition: opacity .4s ease-in-out;
     display: inline-block;
     overflow: hidden;
-    min-height: 200px; }
+    min-height: 200px;
+    border-radius: 5px; }
   .projects .name {
     font-size: 22px;
     padding: 10px 0;
@@ -83,22 +233,41 @@ body {
   .projects .form-actions {
     padding: 15px 0; }
   .projects .task-container {
-    padding: 20px 0; }
+    padding: 20px 0;
+    position: relative; }
+    .projects .task-container .tasks {
+      text-align: left;
+      width: 200px;
+      display: inline-block;
+      word-wrap: break-word;
+      padding-bottom: 5px;
+      font-size: 13px; }
+    .projects .task-container .user {
+      text-align: right;
+      display: inline-block;
+      position: absolute;
+      right: 0;
+      font-size: 13px; }
   .projects .tasks-heading {
     padding-bottom: 10px; }
   .projects .edit {
-    text-decoration: none;
     position: absolute;
     bottom: 15px;
-    color: inherit; }
+    bottom: 0px;
+    left: 9px; }
   .projects .new-circle {
     position: absolute;
     top: -67px;
     height: 40px;
     width: 40px;
     border-radius: 20px;
-    background-color: #2b6481;
-    right: -90px; }
+    background-color: #2B812F;
+    right: -90px;
+    transition: .5s; }
+    .projects .new-circle:before {
+      box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26); }
+    .projects .new-circle:hover, .projects .new-circle:focus {
+      background: #319436; }
     .projects .new-circle p {
       text-decoration: none;
       position: relative;
@@ -107,7 +276,9 @@ body {
       font-size: 25px;
       color: #fff; }
 
-.project-add, .delete, .project-task-delete {
+.project-add,
+.delete,
+.project-task-delete {
   cursor: pointer; }
 
 .project-form {
@@ -130,6 +301,7 @@ body {
   text-align: left;
   position: relative; }
   .individual-project figure {
+    position: relative;
     width: 900px;
     background: #fefefe;
     border: 2px solid #fcfcfc;
@@ -139,40 +311,120 @@ body {
     padding-bottom: 10px;
     transition: opacity .4s ease-in-out;
     display: inline-block;
-    overflow: hidden; }
+    overflow: hidden;
+    border-radius: 5px; }
   .individual-project .info {
-    position: relative; }
+    position: relative;
+    padding: 30px; }
   .individual-project h1 {
     top: 60px;
     text-align: center; }
+  .individual-project .description {
+    padding-bottom: 30px; }
+  .individual-project h3 {
+    font-size: 18px;
+    padding-bottom: 10px; }
+  .individual-project p {
+    font-size: 13px; }
   .individual-project .task {
-    position: relative; }
+    position: relative;
+    padding-top: 15px; }
   .individual-project .project-taskname {
-    font-size: 22px;
+    height: 16px;
+    line-height: 16px;
+    font-size: 16px;
     padding: 10px 0;
     width: 80%;
-    cursor: pointer; }
+    cursor: pointer;
+    transition: .3s;
+    border-radius: 5px; }
     .individual-project .project-taskname:hover {
       background: #dddddd; }
   .individual-project .taskdescription {
     font-size: 13px;
     padding-bottom: 10px; }
+  .individual-project .project-add {
+    font-size: 25px;
+    margin-top: 30px;
+    color: #9D9D9D;
+    transition: .5s; }
+    .individual-project .project-add:hover, .individual-project .project-add:focus {
+      color: #444544; }
   .individual-project .form-actions {
     padding: 15px 0; }
-  .individual-project select {
-    padding: 10px 0; }
+  .individual-project .dropdown {
+    width: 182px;
+    height: auto;
+    background: url(../images/arrow.png) no-repeat right; }
+    .individual-project .dropdown select {
+      padding: 0px 10px;
+      width: 191px;
+      background: transparent;
+      font-size: 14px;
+      line-height: 1;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+      height: 34px;
+      -webkit-appearance: none; }
+      .individual-project .dropdown select:hover, .individual-project .dropdown select:focus, .individual-project .dropdown select:active {
+        outline: none; }
   .individual-project .controls {
     position: absolute;
     right: 0;
-    top: 14px; }
+    top: 23px; }
     .individual-project .controls .project-complete, .individual-project .controls .delete {
-      display: inline; }
+      display: inline;
+      padding-right: 20px; }
   .individual-project .checked {
     text-decoration: line-through; }
   .individual-project .project-delete {
     position: absolute;
-    right: 0;
-    bottom: 0; }
+    right: 30px;
+    bottom: 32px;
+    font-size: 20px;
+    color: #9D9D9D;
+    transition: .5s; }
+    .individual-project .project-delete:hover, .individual-project .project-delete:focus {
+      color: #444544; }
+  .individual-project .project-task-delete {
+    position: relative;
+    font-size: 20px;
+    top: 2px;
+    color: #9D9D9D;
+    transition: .5s; }
+    .individual-project .project-task-delete:hover, .individual-project .project-task-delete:focus {
+      color: #444544; }
+  .individual-project form {
+    padding-top: 25px; }
+  .individual-project input, .individual-project button, .individual-project textarea, .individual-project .cancel {
+    width: 828px;
+    padding: 10px 5px;
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+    font-family: 'Open Sans', sans-serif;
+    color: #444544;
+    outline: none; }
+  .individual-project button {
+    width: 90px;
+    margin: 10px 10px 0 0;
+    font-size: 14px;
+    font-weight: 300;
+    color: #fff;
+    background: #2B812F;
+    transition: .5s;
+    padding: 7px; }
+    .individual-project button:hover, .individual-project button:focus {
+      background: #319436;
+      cursor: pointer; }
+  .individual-project .cancel {
+    cursor: pointer;
+    font-size: 14px;
+    padding: 7px 21px; }
+
+input#complete {
+  height: 15px;
+  width: 15px;
+  cursor: pointer; }
 
 .project-form p {
   margin-bottom: 10px; }
@@ -195,30 +447,40 @@ body {
     padding-bottom: 10px;
     transition: opacity .4s ease-in-out;
     display: inline-block;
-    overflow: hidden; }
+    overflow: hidden;
+    border-radius: 5px; }
+  .new .form-content {
+    padding: 30px; }
   .new p {
     margin-bottom: 15px; }
   .new .description {
     padding: 10px 0 20px; }
-
-.editInPlace-active input {
-  font-family: inherit;
-  font-size: inherit;
-  font-weight: inherit;
-  width: inherit;
-  padding: 0;
-  margin: 0px;
-  background-color: inherit;
-  font-weight: normal;
-  border: 0;
-  border-style: solid;
-  margin: 0;
-  outline: 0;
-  vertical-align: middle; }
-  .editInPlace-active input:focus, .editInPlace-active input:active {
-    border: 0;
-    border-style: none;
-    outline: 0; }
+  .new form {
+    padding-top: 25px; }
+  .new input, .new button, .new textarea, .new .cancel {
+    width: 828px;
+    padding: 10px 5px;
+    border: 1px solid #d3d3d3;
+    border-radius: 5px;
+    font-family: 'Open Sans', sans-serif;
+    color: #444544;
+    outline: none; }
+  .new button {
+    width: 90px;
+    margin: 10px 10px 0 0;
+    font-size: 14px;
+    font-weight: 300;
+    color: #fff;
+    background: #2B812F;
+    transition: .5s;
+    padding: 7px; }
+    .new button:hover, .new button:focus {
+      background: #319436;
+      cursor: pointer; }
+  .new .cancel {
+    cursor: pointer;
+    font-size: 14px;
+    padding: 7px 21px; }
 
 .no-tasks-warn {
   padding-bottom: 20px; }
@@ -226,12 +488,14 @@ body {
 .individual-tasks .task {
   position: relative; }
 .individual-tasks .taskname {
-  height: 25px;
-  line-height: 25px;
-  font-size: 22px;
+  height: 16px;
+  line-height: 16px;
+  font-size: 16px;
   padding: 10px 0;
   width: 80%;
-  cursor: pointer; }
+  cursor: pointer;
+  transition: .3s;
+  border-radius: 5px; }
   .individual-tasks .taskname:hover {
     background: #dddddd; }
 .individual-tasks .task-description {
@@ -242,110 +506,26 @@ body {
 .individual-tasks .controls {
   position: absolute;
   right: 0;
-  top: 14px; }
+  top: 24px; }
   .individual-tasks .controls .complete, .individual-tasks .controls .delete {
-    display: inline; }
+    display: inline;
+    padding-right: 20px; }
+  .individual-tasks .controls .delete {
+    position: relative;
+    font-size: 20px;
+    top: 2px;
+    color: #9D9D9D;
+    transition: .5s; }
+    .individual-tasks .controls .delete:hover, .individual-tasks .controls .delete:focus {
+      color: #444544; }
+.individual-tasks .project-add {
+  margin-top: 30px;
+  color: #9D9D9D;
+  transition: .5s; }
+  .individual-tasks .project-add:hover, .individual-tasks .project-add:focus {
+    color: #444544; }
 
-nav#slide-menu {
-  position: fixed;
-  top: 0;
-  left: -100px;
-  bottom: 0;
-  display: block;
-  float: left;
-  width: 100%;
-  max-width: 284px;
-  height: 100%;
-  -moz-transition: all 300ms;
-  -webkit-transition: all 300ms;
-  transition: all 300ms; }
-  nav#slide-menu > ul {
-    display: block;
-    margin: 40px;
-    padding: 0;
-    list-style: none;
-    opacity: 0.5;
-    line-height: 40px;
-    -moz-transition: all 300ms;
-    -webkit-transition: all 300ms;
-    transition: all 300ms; }
-    nav#slide-menu > ul li {
-      color: #dfe5eb;
-      font-weight: 300;
-      padding: 6px 0;
-      cursor: pointer; }
-      nav#slide-menu > ul li:hover {
-        color: #2b6481; }
-    nav#slide-menu > ul li:before {
-      font-family: "ico";
-      font-style: normal;
-      font-weight: normal;
-      speak: none;
-      display: inline-block;
-      text-decoration: inherit;
-      width: 1em;
-      color: #2b6481;
-      margin-right: 12px;
-      text-align: center;
-      font-variant: normal;
-      font-size: 0.75em;
-      text-transform: none;
-      line-height: 1em; }
-    nav#slide-menu > ul li.sep {
-      margin-top: 7px;
-      padding-top: 14px;
-      border-top: 1px solid #2b6481; }
-    nav#slide-menu > ul li.menu-home:before {
-      content: '\e805'; }
-    nav#slide-menu > ul li.menu-projects:before {
-      content: '\e802'; }
-    nav#slide-menu > ul li.menu-tasks:before {
-      content: '\e800'; }
-    nav#slide-menu > ul li.menu-settings:before {
-      content: '\e803'; }
-    nav#slide-menu > ul li.menu-logout:before {
-      content: '\e804'; }
-
-body.menu-active nav#slide-menu {
-  left: 0px; }
-
-body.menu-active nav#slide-menu ul {
-  left: 0px;
-  opacity: 1; }
-
-/*
-  Content
-*/
-div#content {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  overflow: scroll;
-  background: #fcfeff;
-  border-radius: 0;
-  -moz-box-sizing: border-box;
-  -webkit-box-sizing: border-box;
-  box-sizing: border-box;
-  -moz-box-shadow: -3px 0 6px #373837;
-  -webkit-box-shadow: -3px 0 6px #373837;
-  box-shadow: -3px 0 6px #373837;
-  -moz-transition: all 300ms;
-  -webkit-transition: all 300ms;
-  transition: all 300ms; }
-  div#content div.menu-trigger {
-    position: fixed;
-    top: 10px;
-    left: 10px;
-    z-index: 2;
-    cursor: pointer;
-    -moz-transition: all 300ms;
-    -webkit-transition: all 300ms;
-    transition: all 300ms; }
-
-body.menu-active div#content {
-  left: 284px; }
-
-body.menu-active div#content .menu-trigger {
-  left: 294px; }
+.setting-warning {
+  text-align: center; }
+  .setting-warning p {
+    font-size: 15px; }

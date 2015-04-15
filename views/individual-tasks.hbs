@@ -7,7 +7,6 @@
 				Please click below to add a task.
 				</p>
 			{{/unless}}
-			   <!-- 	<p class="description">{{project.description}}</p> -->
 		       {{#each tasks}}
 		       <div class="task">
 		       	{{#if complete}}
@@ -30,13 +29,16 @@
 		       </p>
 		       <span class="delete" data-id="{{_id}}">&times;</span>
 		   </div>
+		   </div>
 		       {{/each}}
 <!-- 		      <input type="submit" class="save button" value="Save"> -->
-		   		</div>
-		   		    <p class="project-add">Add task:</p>
+		   		
+		   		    <p class="project-add">&plus;</p>
 		   			{{> add-task-form}}
 		    </div>
 
 		</figure>
 	</div>
 </div>
+
+

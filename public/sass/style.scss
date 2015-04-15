@@ -14,27 +14,8 @@ body {
   	}
 }
 
-.hero--content-contain {
-	position: relative;
-	max-width: 960px;
-	margin: auto;
-	padding: 60px 0;
-	text-align: center;
-	top: 30px;
-	color: #FFF;
-	font-family: 'Open Sans', sans-serif;
-	font-size: 16px;
-	font-weight: 300;
-	font-family: inherit;
-	
-	h1 {
-		font-size: 30px;
-		margin-bottom: 15px;						
-	}
-}
 
 .container {
-  // display: flex;
     overflow: hidden;
 
 	.hero {
@@ -42,387 +23,33 @@ body {
 		width: 100%;
 		height: 300px;
 		background-color: #444544;
-		
-	}
 
-	#columns {
-		display: flex;
-		column-width: 320px;
-		column-gap: 15px;
-	  	width: 90%;
-		max-width: 1100px;
-		margin: 50px auto;
-	}
-}
-
-//**************************************************
-// DASHBOARD
-//**************************************************
-
-.dashboard {
-	figure {
-		width: 275px;
-		background: #fefefe;
-		border: 2px solid #fcfcfc;
-		box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
-		margin: 0 2px 15px;
-		padding: 15px;
-		padding-bottom: 10px;
-		transition: opacity .4s ease-in-out;
-		display: inline-block;
-		overflow: hidden;
-
-		h2 {
-			font-size: 22px;
-			padding: 8px 0;
-			text-decoration: none;
-			color: #444544;
-		}
-
-		.svg-icon {
-			margin: 20px 0;
-		}
-	}
-}
-
-
-//**************************************************
-// PROJECTS
-//**************************************************
-
-	.projects {
-		text-align: left;
-		margin-top: 100px;
-		position: relative;
-
-		figure {
+		.hero--content-contain {
 			position: relative;
-			width: 275px;
-			background: #fefefe;
-			border: 2px solid #fcfcfc;
-			box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
-			margin: 0 2px 15px;
-			padding: 15px;
-			padding-bottom: 10px;
-			transition: opacity .4s ease-in-out;
-			display: inline-block;
-			overflow: hidden;
-			min-height: 200px;
-			// column-break-inside: avoid;
-		}
-
-		.name {
-			font-size: 22px;
-			padding: 10px 0;
-			width: 80%;
-		}
-
-		.description {
-			font-size: 13px;
-		}
-
-		.form-actions {
-			padding: 15px 0;
-		}
-
-		.task-container {
-			padding: 20px 0;
-		
-		}
-
-		.tasks-heading {
-			padding-bottom: 10px;
-		}
-
-		.edit {
-			text-decoration: none;
-			position: absolute;
-			bottom: 15px;
-			color: inherit;
-		}
-
-		.new-circle {
-			  position: absolute;
-			  top: -67px;
-			  height: 40px;
-			  width: 40px;
-			  border-radius: 20px;
-			  background-color: #2b6481;
-			  right: -90px;
-
-
-			p {
-				text-decoration: none;
-				position: relative;
-				top: 8px;
-				left: 13px;
-				font-size: 25px;
-				color: #fff;
-			}
-		}
-
-	}
-
-			.project-add, .delete, .project-task-delete {
-				cursor: pointer;
-			}
-
-			.project-form {
-				display: none;
-				transition: 0.75s;
-			}
-
-			.show {
-				display: block;
-			}
-
-//**************************************************
-// EDIT PROJECTS
-//**************************************************
-
-
-// Single project view
-.content-contain {
-	top: -55px;
-	position: relative;
-	font-family: 'Open Sans', sans-serif;
-	max-width: 960px;
-	margin: auto;
-	font-size: 16px;
-	text-align: center;
-}
-
-.individual-project {
-	text-align: left;
-	position: relative;
-	// padding: 50px 0;
-
-	figure {
-		width: 900px;
-		background: #fefefe;
-		border: 2px solid #fcfcfc;
-		box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
-		margin: 0 2px 15px;
-		padding: 15px;
-		padding-bottom: 10px;
-		transition: opacity .4s ease-in-out;
-		display: inline-block;
-		overflow: hidden;
-		// column-break-inside: avoid;
-	}
-
-	.info {
-		position: relative;
-	}
-
-
-	
-	h1 {
-		top: 60px;
-		text-align: center;
-	}
-
-
-		.task {
-			position: relative;
-
-		}
-
-		.project-taskname {
-			font-size: 22px;
-			padding: 10px 0;
-			width: 80%;
-			cursor: pointer;
-
-			&:hover {
-				background: #dddddd;
-			}
-		}
-
-		.taskdescription {
-			font-size: 13px;
-			padding-bottom: 10px;
-		}
-
-		.form-actions {
-			padding: 15px 0;
-		}
-
-		select {
-			padding: 10px 0;
-		}
-
-
-		.controls {
-			position: absolute;
-			  right: 0;
-			  top: 14px;
-
-				.project-complete, .delete {
-					display: inline;
-				}
-			}
-
-
-
-
-	.checked {
-		text-decoration: line-through;
-	}
-
-	.project-delete {
-		position: absolute;
-		right: 0;
-		bottom: 0;
-	}
-
-}
-
-	.project-form {
-
-		p {
-			margin-bottom: 10px;
-		}
-
-	.name {
-		  padding: 20px 0 10px;
-	}
-
-	.description {
-		padding: 10px 0 20px;
-
-	}
-
-	.form-actions {
-		padding: 15px 0;
-	}
-}
-
-
-// NEW 
-
-.new {
-	text-align: left;
-
-	figure {
-		width: 900px;
-		background: #fefefe;
-		border: 2px solid #fcfcfc;
-		box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
-		margin: 0 2px 15px;
-		padding: 15px;
-		padding-bottom: 10px;
-		transition: opacity .4s ease-in-out;
-		display: inline-block;
-		overflow: hidden;
-		// column-break-inside: avoid;
-	}
-
-
-	p {
-		margin-bottom: 15px;
-	}
-
-	.name {
-		
-	}
-
-	.description {
-		padding: 10px 0 20px;
-
-		textarea {
-
-		}
-
-
-	}
-
-
-}
-
-.editInPlace-active {
-	input {
-		font-family: inherit;
-		font-size: inherit;
-		font-weight: inherit;
-		width: inherit;
-		padding: 0;
-		margin: 0px;
-		background-color: inherit;
-		font-weight: normal;
-		border: 0;
-		border-style:solid;
-		margin: 0;
-		outline: 0;
-		vertical-align: middle;
-		
-		&:focus, &:active {
-			border: 0;
-			border-style: none;
-			outline: 0;
+			max-width: 960px;
+			margin: auto;
+			padding: 60px 0;
+			text-align: center;
+			top: 30px;
+			color: #FFF;
+			font-family: 'Open Sans', sans-serif;
+			font-size: 16px;
+			font-weight: 300;
+			font-family: inherit;
 			
-
-
+			h1 {
+				font-size: 30px;
+				margin-bottom: 15px;						
+			}
 		}
+		
 	}
 }
-
-
-
-//**************************************************
-// MY TASKS
-//**************************************************
-
-.no-tasks-warn {
-	padding-bottom: 20px;
-}
-
-.individual-tasks {
-
-	.task {
-		position: relative;
-	}
-
-	.taskname {
-		height: 25px;
-		line-height: 25px;
-		font-size: 22px;
-		padding: 10px 0;
-		width: 80%;
-		cursor: pointer;
-
-		&:hover {
-		background: #dddddd;
-		}
-	}
-
-	.task-description {
-		font-size: 13px;
-		padding-bottom: 10px;
-	}
-
-	.form-actions {
-		padding: 15px 0;
-	}
-	.controls {
-		position: absolute;
-		  right: 0;
-		  top: 14px;
-
-		.complete, .delete {
-			display: inline;
-		}
-	}
-}
-
-//**************************************************
-// FORMS
-//**************************************************
-
 
 //**************************************************
 // MENU
 //**************************************************
+
 nav#slide-menu {
 	position: fixed;
 	top: 0;
@@ -434,11 +61,9 @@ nav#slide-menu {
 	max-width: 284px;
 	height: 100%;
 
-	-moz-transition: all 300ms;
-	-webkit-transition: all 300ms;
 	transition: all 300ms;
 
-	> ul {
+	ul {
 		display: block;
 		margin: 40px;
 		padding: 0;
@@ -446,8 +71,6 @@ nav#slide-menu {
 		opacity: 0.5;
 		line-height: 40px;
 
-		-moz-transition: all 300ms;
-		-webkit-transition: all 300ms;
 		transition: all 300ms;
 
 		li {
@@ -457,8 +80,8 @@ nav#slide-menu {
 			cursor: pointer;
 
 			&:hover { 
-			color: #2b6481; 
-		}
+				color: #2b6481; 
+			}
 		}
 
 		li:before {
@@ -484,20 +107,34 @@ nav#slide-menu {
 			border-top: 1px solid #2b6481; 
 		}
 
-		li.menu-home:before { content: '\e805'; }
-		li.menu-projects:before { content: '\e802'; }
-		li.menu-tasks:before { content: '\e800'; }
-		li.menu-settings:before { content: '\e803'; }
-		li.menu-logout:before { content: '\e804'; }
+		li.menu-home:before { 
+			content: '\e805'; 
+		}
+
+		li.menu-projects:before { 
+			content: '\e802'; 
+		}
+
+		li.menu-tasks:before { 
+			content: '\e800'; 
+		}
+
+		li.menu-settings:before { 
+			content: '\e803'; 
+		}
+
+		li.menu-logout:before { 
+			content: '\e804'; 
+		}
 	}
 }
 
-body.menu-active nav#slide-menu { left: 0px; }
-body.menu-active nav#slide-menu ul { left: 0px; opacity: 1; }
-
-/*
-  Content
-*/
+body.menu-active nav#slide-menu { 
+	left: 0px; 
+}
+body.menu-active nav#slide-menu ul { 
+	left: 0px; opacity: 1; 
+}
 
 div#content {
 	position: fixed;
@@ -508,17 +145,8 @@ div#content {
 	overflow: scroll;
 	background: #fcfeff;
 	border-radius: 0;
-
-	-moz-box-sizing: border-box;
-	-webkit-box-sizing: border-box;
 	box-sizing: border-box;
-
-	-moz-box-shadow: -3px 0 6px darken(#444544, 5%);
-	-webkit-box-shadow: -3px 0 6px darken(#444544, 5%);
 	box-shadow: -3px 0 6px darken(#444544, 5%);
-
-	-moz-transition: all 300ms;
-	-webkit-transition: all 300ms;
 	transition: all 300ms;
 
 	div.menu-trigger {
@@ -527,17 +155,640 @@ div#content {
 		left: 10px;
 		z-index:2;
 		cursor: pointer; 
-
-		-moz-transition: all 300ms;
-		-webkit-transition: all 300ms;
 		transition: all 300ms;
 
 	}
 }
 
-body.menu-active div#content { left: 284px; }
-body.menu-active div#content .menu-trigger { left: 294px; }
+body.menu-active div#content { 
+	left: 284px; 
+}
+
+body.menu-active div#content .menu-trigger { 
+	left: 294px; 
+}
+
+//**************************************************
+// LOGIN & REGISTER
+//**************************************************
+
+.admin-form {
+	text-align: center;
+	background: #fff;
+	width: 400px;
+	margin: auto;
+	margin-top: -60px;
+	padding: 50px;
+	box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+
+	.heading {
+		font-size: 22px;
+	}
+
+	.validation {
+		padding: 15px 0 0;
+		color: #cd2b2b;
+		font-size: 14px;
+	}
+
+	input, button {
+		 width: 250px;
+		 margin: 10px 10px 0 0;
+		 padding: 10px 5px;
+		 border: 1px solid #d3d3d3;
+		 border-radius: 5px;
+		 background: #d3d3d3;
+		 font-family:  'Open Sans', sans-serif;
+		 color: #444544;
+		 outline: none;
+	}
+
+	button {
+		width: 265px;
+		text-transform: uppercase;
+		font-size: 14px;
+		font-weight: 300;
+		color: #fff;
+		background: #2B812F;
+		transition: .5s;
+		padding: 7px;
+
+		&:hover, &:focus, {
+			background: lighten(#2B812F, 5%);
+			cursor: pointer;
+		}
+	}
+
+	a {
+		text-decoration: none;
+		color: #9D9D9D;
+		font-size: 14px;
+	}
+
+}
+
+//**************************************************
+// DASHBOARD
+//**************************************************
+
+.dashboard {
+	figure {
+		width: 275px;
+		background: #fefefe;
+		border: 2px solid #fcfcfc;
+		box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+		margin: 0 2px 15px;
+		padding: 15px;
+		padding-bottom: 10px;
+		transition: opacity .4s ease-in-out;
+		display: inline-block;
+		overflow: hidden;
+		border-radius: 5px;
+
+		h2 {
+			font-size: 22px;
+			padding: 8px 0;
+			text-decoration: none;
+			color: #444544;
+		}
+
+		.svg-icon {
+			margin: 20px 0;
+		}
+	}
+}
+
+//**************************************************
+// INLINE EDIT
+//**************************************************
+
+.editInPlace-active {
+	position: relative;
+
+	input {
+		font-family: inherit;
+		font-size: inherit;
+		font-weight: inherit;
+		width: inherit;
+		padding: 0;
+		background-color: inherit;
+		font-weight: normal;
+		border: 0;
+		border-style:solid;
+		margin: 0;
+		outline: 0;
+		vertical-align: middle;
+		
+		&:focus, &:active {
+			border: 0;
+			border-style: none;
+			outline: 0;
+		}
+	}
+
+	form {
+		position: relative;
+		top: -13px;
+		left: -5px;
+	}
+}
+
+//**************************************************
+// PROJECTS
+//**************************************************
+
+.projects {
+	text-align: left;
+	margin-top: 100px;
+	position: relative;
+
+	.info {
+		padding-bottom: 20px;
+	}
+
+	figure {
+		position: relative;
+		width: 275px;
+		background: #fefefe;
+		border: 2px solid #fcfcfc;
+		box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+		margin: 0 2px 15px;
+		padding: 15px;
+		padding-bottom: 10px;
+		transition: opacity .4s ease-in-out;
+		display: inline-block;
+		overflow: hidden;
+		min-height: 200px;
+		border-radius: 5px;
+	}
+
+	.name {
+		font-size: 22px;
+		padding: 10px 0;
+		width: 80%;
+	}
+
+	.description {
+		font-size: 13px;
+	}
+
+	.form-actions {
+		padding: 15px 0;
+	}
+
+	.task-container {
+		padding: 20px 0;
+		position: relative;
+
+		.tasks {
+			text-align: left;
+			width: 200px;
+			display: inline-block;
+			word-wrap: break-word;
+			padding-bottom: 5px;
+			font-size: 13px;
+		}
+
+		.user {
+			text-align: right;
+			display: inline-block;
+			position: absolute;
+			right: 0;
+			font-size: 13px;
+		}
+	
+	}
+
+	.tasks-heading {
+		padding-bottom: 10px;
+	}
+
+	.edit {
+		position: absolute;
+		bottom: 15px;
+		bottom: 0px;
+		left: 9px;
+	}
+
+	.new-circle {
+		position: absolute;
+		top: -67px;
+		height: 40px;
+		width: 40px;
+		border-radius: 20px;
+		background-color: #2B812F;
+		right: -90px;
+		transition: .5s;
+
+		&:before {
+			box-shadow: 0 2px 5px 0 rgba(0,0,0,.26);
+		}
+
+		&:hover, &:focus {
+			background: lighten(#2B812F, 5%);
+		}
+
+		p {
+			text-decoration: none;
+			position: relative;
+			top: 8px;
+			left: 13px;
+			font-size: 25px;
+			color: #fff;
+		}
+	}
+}
+
+.project-add, 
+.delete, 
+.project-task-delete {
+	cursor: pointer;
+}
+
+.project-form {
+	display: none;
+	transition: 0.75s;
+}
+
+.show {
+	display: block;
+}
 
 
+//**************************************************
+// INDIVIDUAL PROJECTS
+//**************************************************
+
+.content-contain {
+	top: -55px;
+	position: relative;
+	font-family: 'Open Sans', sans-serif;
+	max-width: 960px;
+	margin: auto;
+	font-size: 16px;
+	text-align: center;
+}
+
+.individual-project {
+	text-align: left;
+	position: relative;
+
+	figure {
+		position: relative;
+		width: 900px;
+		background: #fefefe;
+		border: 2px solid #fcfcfc;
+		box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+		margin: 0 2px 15px;
+		padding: 15px;
+		padding-bottom: 10px;
+		transition: opacity .4s ease-in-out;
+		display: inline-block;
+		overflow: hidden;
+		border-radius: 5px;
+	}
+
+	.info {
+		position: relative;
+		padding: 30px;
+	}
+	
+	h1 {
+		top: 60px;
+		text-align: center;
+	}
+
+	.description {
+		padding-bottom: 30px;
+
+	}
+
+	h3 {
+		font-size: 18px;
+		padding-bottom: 10px;
+	}
+
+	p {
+		font-size: 13px;
+	}
+
+	.task {
+		position: relative;
+		padding-top: 15px;
+	}
+
+	.project-taskname {
+		height: 16px;
+		line-height: 16px;
+		font-size: 16px;
+		padding: 10px 0;
+		width: 80%;
+		cursor: pointer;
+		transition: .3s;
+		border-radius: 5px;
+
+		&:hover {
+			background: #dddddd;
+		}
+	}
+
+	.taskdescription {
+		font-size: 13px;
+		padding-bottom: 10px;
+	}
+
+	.project-add {
+		font-size: 25px;
+		margin-top: 30px;
+		color: #9D9D9D;
+		transition: .5s;
+
+		&:hover, &:focus {
+			color: #444544;
+		}
+
+	}
+
+	.form-actions {
+		padding: 15px 0;
+	}
+
+	.dropdown {
+	   width: 182px;
+	   height: auto;
+	   background: url(../images/arrow.png) no-repeat right;
+	   
+		select {
+			padding: 0px 10px;
+			width: 191px;
+			background: transparent;
+			font-size: 14px;
+			line-height: 1;
+			border: 1px solid #ccc;
+			border-radius: 5px;
+			height: 34px;
+			-webkit-appearance: none;
+
+			&:hover, &:focus, &:active {
+				outline: none;
+			}	 
+		}   
+	}
+
+	.controls {
+		position: absolute;
+		right: 0;
+		top: 23px;
+
+		.project-complete, .delete {
+			display: inline;
+			padding-right: 20px;
+		}
+	}
+
+	.checked {
+		text-decoration: line-through;
+	}
+
+	.project-delete {
+		position: absolute;
+		right: 30px;
+		bottom: 32px;
+		font-size: 20px;
+		color: #9D9D9D;
+		transition: .5s;
+
+		&:hover, &:focus {
+			color: #444544;
+		}
+	}
+
+	.project-task-delete {
+		position: relative;
+		font-size: 20px;
+		top: 2px;
+		color: #9D9D9D;
+		transition: .5s;
+
+		&:hover, &:focus {
+			color: #444544;
+		}
+	}
+
+	form {
+		padding-top: 25px;
+	}
+
+	input, button, textarea, .cancel {
+		 width: 828px;
+		 padding: 10px 5px;
+		 border: 1px solid #d3d3d3;
+		 border-radius: 5px;
+		 font-family:  'Open Sans', sans-serif;
+		 color: #444544;
+		 outline: none;
+	}
+
+	button {
+		width: 90px;
+		margin: 10px 10px 0 0;
+		font-size: 14px;
+		font-weight: 300;
+		color: #fff;
+		background: #2B812F;
+		transition: .5s;
+		padding: 7px;
+
+		&:hover, &:focus, {
+			background: lighten(#2B812F, 5%);
+			cursor: pointer;
+		}
+	}
+
+	.cancel {
+		cursor: pointer;
+		font-size: 14px;
+		padding: 7px 21px;
+	}
+}
+
+input#complete {
+	height: 15px;
+	width: 15px;
+	cursor: pointer;
+}
+
+.project-form {
+	p {
+		margin-bottom: 10px;
+	}
+
+	.name {
+		padding: 20px 0 10px;
+	}
+
+	.description {
+		padding: 10px 0 20px;
+	}
+
+	.form-actions {
+		padding: 15px 0;
+	}
+}
 
 
+//**************************************************
+// NEW PROJECTS
+//**************************************************
+
+.new {
+	text-align: left;
+
+	figure {
+		width: 900px;
+		background: #fefefe;
+		border: 2px solid #fcfcfc;
+		box-shadow: 0 1px 2px rgba(34, 25, 25, 0.4);
+		margin: 0 2px 15px;
+		padding: 15px;
+		padding-bottom: 10px;
+		transition: opacity .4s ease-in-out;
+		display: inline-block;
+		overflow: hidden;
+		border-radius: 5px;
+	}
+
+	.form-content {
+		padding: 30px;
+	}
+
+	p {
+		margin-bottom: 15px;
+	}
+
+	.description {
+		padding: 10px 0 20px;
+	}
+
+	form {
+		padding-top: 25px;
+	}
+
+	input, button, textarea, .cancel {
+		 width: 828px;
+		 padding: 10px 5px;
+		 border: 1px solid #d3d3d3;
+		 border-radius: 5px;
+		 font-family:  'Open Sans', sans-serif;
+		 color: #444544;
+		 outline: none;
+
+	}
+
+	button {
+		width: 90px;
+		margin: 10px 10px 0 0;
+		font-size: 14px;
+		font-weight: 300;
+		color: #fff;
+		background: #2B812F;
+		transition: .5s;
+		padding: 7px;
+
+		&:hover, &:focus, {
+			background: lighten(#2B812F, 5%);
+			cursor: pointer;
+		}
+	}
+
+	.cancel {
+		cursor: pointer;
+		font-size: 14px;
+		padding: 7px 21px;
+	}
+}
+
+//**************************************************
+// MY TASKS
+//**************************************************
+
+.no-tasks-warn {
+	padding-bottom: 20px;
+}
+
+.individual-tasks {
+
+	.task {
+		position: relative;
+	}
+
+	.taskname {
+		height: 16px;
+		line-height: 16px;
+		font-size: 16px;
+		padding: 10px 0;
+		width: 80%;
+		cursor: pointer;
+		transition: .3s;
+		border-radius: 5px;
+
+		&:hover {
+		background: #dddddd;
+		}
+	}
+
+	.task-description {
+		font-size: 13px;
+		padding-bottom: 10px;
+	}
+
+	.form-actions {
+		padding: 15px 0;
+	}
+
+	.controls {
+		position: absolute;
+		right: 0;
+		top: 24px;
+
+		.complete, .delete {
+			display: inline;
+			padding-right: 20px;
+		}
+
+		.delete {
+			position: relative;
+			font-size: 20px;
+			top: 2px;
+			color: #9D9D9D;
+			transition: .5s;
+
+			&:hover, &:focus {
+				color: #444544;
+			}
+		}
+	}
+
+	.project-add {
+		margin-top: 30px;
+		color: #9D9D9D;
+		transition: .5s;
+
+		&:hover, &:focus {
+			color: #444544;
+		}
+
+	}
+}
+
+//**************************************************
+// SETTINGS
+//**************************************************
+
+.setting-warning {
+	text-align: center;
+
+	p {
+		font-size: 15px;
+	}
+}
