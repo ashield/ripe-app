@@ -2,23 +2,27 @@
 	<a href="/projects/">
 		<figure>
 			<h2>Projects</h2>
-			<img class="svg-icon" src="images/launch.svg" alt="">
+			<svg class="svg-icon" role="presentation" width="300" height="300">
+		        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/images/sprite.svg#launch"></use>
+		    </svg>
 		</figure>
 	</a>
 		
 	<a href="/users/{{user._id}}">
 	<figure>
 		<h2>My Tasks</h2>
-		<img class="svg-icon" src="images/person.svg" alt="">
+			<svg class="svg-icon" role="presentation" width="300" height="300">
+		        <use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/images/sprite.svg#person"></use>
+		    </svg>
 	</figure>
 	</a>
-	
+
 	<a href="/settings/{{user._id}}">
 		<figure>
-			<!-- {{#if user}} -->
 	 		<h2>Settings</h2>
-	 		<!-- {{/if}} -->
-	 		<img class="svg-icon" src="images/settings.svg" alt="">
+			<svg class="svg-icon" role="presentation" width="300" height="300">
+	        	<use xmlns:xlink="http://www.w3.org/1999/xlink" xlink:href="/images/sprite.svg#settings"></use>
+			</svg>
 		</figure>
 	</a>
 </div>
