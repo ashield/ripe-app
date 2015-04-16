@@ -9,7 +9,6 @@ var mongoose = require('mongoose'),
 var projectSchema = Schema ({
 	name: String,
 	description: String,
-	// user: String, // user who created project
 	status: Number, // 1 = To do, 2 = in progress, 3 = done
 	date: Date,
 	position: Number,
@@ -19,8 +18,8 @@ var projectSchema = Schema ({
 var taskSchema = Schema ({
 	taskname: String,
 	taskdescription: String,
-	user: { type: String, ref: 'Users'}, // need to default to current user
-	_project: { type: Schema.Types.ObjectId, ref: 'Project' }, // project that the task is associated, allowed to be null as tasks can be created individul from projects
+	user: { type: String, ref: 'Users'},
+	_project: { type: Schema.Types.ObjectId, ref: 'Project' },
 	complete: { type: Boolean, default: false }
 })
 
@@ -32,7 +31,6 @@ var Project  = mongoose.model('Project', projectSchema),
 	Task = mongoose.model('Task', taskSchema),
 	Settings = mongoose.model('Settings', settingsSchema);
 
-
 var Users = require('./models/user');
 
 
@@ -42,6 +40,7 @@ exports.login = function (req, res) {
     res.render('login', { title : "Login to Ripe App" });
 }
 
+// authenticates a user through passport
 exports.loginUser = function (req, res, next) {
      passport.authenticate('local', function(err, user, info) {
        if (err) { return next(err); }
@@ -50,7 +49,6 @@ exports.loginUser = function (req, res, next) {
          if (err) { return next(err); }
          return res.redirect('/');
        });
-       console.log(user.username);
      })(req, res, next);
    }
 
@@ -62,6 +60,7 @@ exports.register = function (req, res) {
     res.render('register', {title: 'Register for Ripe App'});
 }
 
+// registers a user through passport
 exports.registerUser = function (req, res) {
         Users.register(new Users({ username : req.body.username }), req.body.password, function(err, account) {
             if (err) {
@@ -94,6 +93,7 @@ exports.dashboard = function (req, res) {
 
 // PROJECTS
 
+// create project
 exports.createProject = function(req, res) {
     var project = new Project({
         name: req.body.name,
@@ -108,10 +108,12 @@ exports.createProject = function(req, res) {
 
 };
 
+// renders the page to enter new project details
 exports.new = function (req, res){
 	res.render('new', {title: 'Add project', user: req.user});
 }
 
+// adds and updates tasks within a project
 exports.ProjectUpdateTasks = function (req, res) {
     Project.findOne({'_id':mongoose.Types.ObjectId(req.param('id'))}, function (err, project) {
         if (err) return console.error(err); // change to 404 page
@@ -148,7 +150,7 @@ exports.ProjectUpdateTasks = function (req, res) {
    });
 }
 
-
+// renders the /projects page
 exports.allProjects = function (req, res) {
     Project.find({})
     .populate('tasks')
@@ -168,6 +170,7 @@ exports.allProjects = function (req, res) {
 
 };
 
+// renders the individual project page
 exports.showOneProject = function (req, res) {
     Project.findOne({'_id':mongoose.Types.ObjectId(req.param('id'))}, function (err, project) {
     	if (err) return console.error(err);
@@ -186,6 +189,7 @@ exports.showOneProject = function (req, res) {
 
 // TASKS
 
+// create and individual task for a user
 exports.createTask = function(req, res) {
     var task = new Task({
         taskname: req.body.taskname,
@@ -211,6 +215,7 @@ exports.showTask = function (req, res) {
 
 // USERS
 
+// this is not currently used but will be when setting is up and running
 exports.allUsers = function (req, res) {
     Users.find(function (err, users) {
         if (err) return console.error(err);
@@ -218,18 +223,7 @@ exports.allUsers = function (req, res) {
     })
 };
 
-exports.createUser = function(req, res) {
-    var user = new Users({
-        username: req.body.username,
-    });
-
-  	res.send(user);
-
-    user.save(function (err, user) {
-    	if (err) return console.error(err);
-    });
-};
-
+// show all tasks assigned to the logged in user
 exports.myTasks = function (req, res) {
     Users.findOne({'_id':mongoose.Types.ObjectId(req.param('id'))}, function (err, user) {
     	if (err) return console.error(err);
@@ -252,6 +246,7 @@ exports.myTasks = function (req, res) {
     });
 };
 
+// updates individual tasks through inline edit
 exports.updateIndividualTasks = function (req, res) {
     Task.findOne({'_id':mongoose.Types.ObjectId(req.param('id'))}, function (err, task) {
         if (err) return console.error(err);
@@ -262,6 +257,7 @@ exports.updateIndividualTasks = function (req, res) {
     });
 }
 
+// checks off tasks and crosses them out in the UI
 exports.checkOffTasks = function (req, res) {
     Task.findOne({'_id':mongoose.Types.ObjectId(req.param('id'))}, function (err, task) {
         if (err) return console.error(err);
@@ -271,6 +267,7 @@ exports.checkOffTasks = function (req, res) {
     });
 }
 
+// used to view and individual task
 exports.showSingleTask = function (req, res) {
     Task.findOne({'_id':mongoose.Types.ObjectId(req.param('id'))}, function (err, task) {
         if (err) return console.error(err);
@@ -278,7 +275,7 @@ exports.showSingleTask = function (req, res) {
     });
 };
 
-
+// deletes and individual task
 exports.deleteTask = function (req, res) {
     Task.remove({'_id':mongoose.Types.ObjectId(req.param('id'))}, function (err, task) {
         if (err) return console.error(err); // change to 404 page
@@ -286,6 +283,7 @@ exports.deleteTask = function (req, res) {
     });
 }
 
+// deletes and entire project
 exports.deleteProject = function (req, res) {
     Project.remove({'_id':mongoose.Types.ObjectId(req.param('id'))}, function (err, project) {
         if (err) return console.error(err); // change to 404 page
@@ -293,6 +291,7 @@ exports.deleteProject = function (req, res) {
     });
 }
 
+// renders the setting screen for and individual user.
 exports.settings = function (req, res) {
     Users.findOne({'_id':mongoose.Types.ObjectId(req.param('id'))}, function (err, user) {
         if (err) return console.error(err);

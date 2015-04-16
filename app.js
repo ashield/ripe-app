@@ -14,10 +14,6 @@ var express = require('express'),
     ripe = require('./ripe'),
     app = express();
 
-
-// Passposrt Auth
-
-
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.engine('hbs', expressHbs({extname: 'hbs', defaultLayout: 'main.hbs'}));
@@ -97,9 +93,6 @@ app.route('/users')
     // Get all projects
     .get(ripe.allUsers)
 
-    // create new user
-    .post(ripe.createUser);
-
 // Individual users tasks
 app.route('/users/:id')
     // view a project item
@@ -133,8 +126,6 @@ app.route('/logout')
 app.route('/settings/:id')
     .get(ripe.settings)
 
-
-
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
@@ -166,11 +157,12 @@ app.use(function(err, req, res, next) {
     });
 });
 
-
 module.exports = app;
 
+// LOCAL DB
 // mongoose.connect('mongodb://localhost/ripedb');
 
+// PROD DB
 mongoose.connect('mongodb://ripeuser:ripepassword@ds061721.mongolab.com:61721/ripedb');
 
 var db = mongoose.connection;
