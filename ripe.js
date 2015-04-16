@@ -296,7 +296,7 @@ exports.settings = function (req, res) {
     Users.findOne({'_id':mongoose.Types.ObjectId(req.param('id'))}, function (err, user) {
         if (err) return console.error(err);
         if (req.user) {
-                res.render('settings', {title: "Hello " + user.username, user: user})
+                res.render('settings', {title: "Hello " + user.username, user: req.user})
             } else {
                 res.redirect('/login');
             }        

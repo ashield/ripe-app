@@ -126,6 +126,10 @@ app.route('/logout')
 app.route('/settings/:id')
     .get(ripe.settings)
 
+// quick patch for settings not redirecting when user wasn't logged in
+app.route('/settings/')
+    .get(ripe.login)
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     var err = new Error('Not Found');
