@@ -4,6 +4,9 @@ var express = require('express');
 var server = require("../app");
 var request = require('supertest');
 var app = express();
+var mongoose = require('mongoose');
+var User = require("../models/user");
+ripe = require('../ripe'),
 
 // Test routes blocked by auth
 it("should redirect to login", function (done) {
@@ -13,16 +16,10 @@ it("should redirect to login", function (done) {
     });
 });
 
-
-// tests to add
-	//register user - find way to get the id and then perform that other things from there
-
-// simulates a login and then accessing a page after auth
+// need to include a test to register a user
 
 describe('login and navigate to a secure page', function(){
-
     var agent = request.agent(server);
-
     //before all the tests run, log in
     before(function(done){
         request(server)
@@ -35,7 +32,7 @@ describe('login and navigate to a secure page', function(){
             if (err) { return done(err); }
 
             agent.saveCookies(res);
-
+        
             done();
         });
     });
@@ -62,10 +59,8 @@ describe('login and navigate to a secure page', function(){
 
     it('navigate to tasks', function (done){
     	// can user user ID already setup for local tesing
-        var req = request(server).get('/users/55293ec61db8d47cb2488b05')
+        var req = request(server).get('/users/552fcf93cc57b66cda83aca7')
         .expect(200);
-
-        console.log(req.user._id)
 
         //attach the logged in cookies to the agent
         agent.attachCookies(req);
@@ -91,7 +86,7 @@ describe('login and navigate to a secure page', function(){
 
     it('post task', function (done){
         request(server)
-        .post('/users/55293ec61db8d47cb2488b05')
+        .post('/users/552fcf93cc57b66cda83aca7/552fcf93cc57b66cda83aca7')
         .send({
             taskname: 'test',
             taskdescription: 'test',
