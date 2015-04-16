@@ -234,7 +234,7 @@ exports.myTasks = function (req, res) {
     Users.findOne({'_id':mongoose.Types.ObjectId(req.param('id'))}, function (err, user) {
     	if (err) return console.error(err);
 
-            Task.find({})
+            Task.find({user: user.username})
             .populate('_project')
             .exec(function(error, data) {
             var output = [];
