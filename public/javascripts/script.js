@@ -4,7 +4,6 @@
 			var payload = $(this).text();
 			var user_id = window.location.pathname.substring("/users/".length);
 			if ($(this).data('id') == undefined) {
-				console.log('we need a new task for this one')
 				$.ajax({
 				  type: "POST",
 				  url: '/users/' + user_id,
@@ -23,8 +22,6 @@
 				  dataType: 'json'
 				}); 
 			}
-			console.log($(this).text())
-			console.log('/users/' + user_id + '/' + $(this).data('id'))
 			return enteredText;
 		}
 	});
@@ -38,7 +35,6 @@
 			var project_id = window.location.pathname.substring("/projects/".length);
 			
 			if ($(this).data('id') == undefined) {
-				console.log('we need a new task for this one')
 				$.ajax({
 				  type: "POST",
 				  url: '/projects/' + project_id,
@@ -57,7 +53,6 @@
 			  dataType: 'json'
 			});
 		}
-			console.log($(this).text())
 			return enteredText;
 		}
 	});
@@ -136,7 +131,7 @@
 				});
 
 				$(".taskname[data-id='"+$(this).data("id")+"']").addClass('checked')
-				console.log('checked')
+			
 			}
 
 	 		if (!$(":checkbox[data-id='"+$(this).data("id")+"']").is(":checked")) {
@@ -148,7 +143,6 @@
 				  dataType: 'json'
 				});
 				$(".taskname[data-id='"+$(this).data("id")+"']").removeClass('checked')
-				console.log('unchecked')
 			}
 	});
 })();
@@ -166,7 +160,7 @@
 				});
 
 				$(".project-taskname[data-id='"+$(this).data("id")+"']").addClass('checked')
-				console.log('checked')
+			
 			}
 
 	 		if (!$(":checkbox[data-id='"+$(this).data("id")+"']").is(":checked")) {
@@ -178,7 +172,7 @@
 				  dataType: 'json'
 				});
 				$(".project-taskname[data-id='"+$(this).data("id")+"']").removeClass('checked')
-				console.log('unchecked')
+
 			}
 	});
 })();
